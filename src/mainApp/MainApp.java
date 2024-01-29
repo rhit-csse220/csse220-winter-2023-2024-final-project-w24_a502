@@ -12,7 +12,7 @@ public class MainApp {
 	
 	private void runApp() {
 		System.out.println("Write your cool arcade game here!");	
-		System.out.println("hi there");
+		System.out.println("Ian there");
 	} // runApp
 
 	/**
