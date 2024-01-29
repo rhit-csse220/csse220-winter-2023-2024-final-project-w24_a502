@@ -8,11 +8,13 @@ package mainApp;
  * <br>Restrictions: None
  */
 public class MainApp {
-	//你好
+	//
+	
 	
 	private void runApp() {
 		System.out.println("Write your cool arcade game here!");	
-		System.out.println("Ian there");
+
+		System.out.println("fan there");
 	} // runApp
 
 	/**
