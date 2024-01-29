@@ -11,7 +11,8 @@ public class MainApp {
 	//你好
 	
 	private void runApp() {
-		System.out.println("Write your cool arcade game here!");		
+		System.out.println("Write your cool arcade game here!");	
+		System.out.println("hi there");
 	} // runApp
 
 	/**
