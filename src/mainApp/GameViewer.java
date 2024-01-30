@@ -1,9 +1,13 @@
 package mainApp;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
-import java.util.Timer;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.TimerTask;
-
+import javax.swing.Timer;
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardDownRightHandler;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,30 +32,37 @@ public class GameViewer extends JPanel {
 	private static final int PAUSE = 2;
 	private static final int GAME_OVER = 3;
 	
-	private Timer timer; 
-	private int intervel = 1000 / 100; // time interval (ms)
+	private static final int DELAY = 1000 / 100; // time interval (ms)
 
-	private static Component gameComponet;
+	private static GameComponent gameComponet;
 
 	
 	private void runApp() {
 
-		timer = new Timer(); //timer
-		timer.schedule(new TimerTask() {
+		
+
+		Timer t = new Timer(DELAY, new ActionListener() {
 			@Override
-			public void run() {
-				if (state == RUNNING) { //state
+			public void actionPerformed(ActionEvent arg0) {
+			
+				handleGenerateObjects();
+				handleCheckGameOver();
 
-					handleCheckGameOver();
-					
-				}
-				gameComponet.repaint(); // 
+				gameComponet.update();
+				gameComponet.repaint();
 			}
-
-		}, intervel, intervel);
+		});
+		
+		//Starts the simulator
+		t.start();
 
 
 	} // runApp
+
+	protected void handleGenerateObjects() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'handleGenerateObjects'");
+	}
 
 	protected void handleCheckGameOver() {
 		// TODO Auto-generated method stub
@@ -72,11 +83,11 @@ public class GameViewer extends JPanel {
 		frame.setLocationRelativeTo(null); // set location
 
 		gameComponet=new GameComponent();
-		frame.add(gameComponet);
+		frame.add(gameComponet, BorderLayout.CENTER);
 
 		frame.setVisible(true); // 
 
-		game.runApp() ; // start game	
+		game.runApp(); // start game	
 	} // main
 
 }

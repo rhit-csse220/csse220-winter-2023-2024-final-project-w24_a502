@@ -44,4 +44,11 @@ public class GameComponent extends JComponent{
         
 	}
 
+    public void update(){
+
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    
+
 }
