@@ -13,11 +13,12 @@ public class GameComponent extends JComponent{
     private ArrayList<CollideableObject> collideableObjects = new ArrayList<CollideableObject>();
     private ScoreRecorder scoreRecorder;
     private Background background;
+    private Player player;
 
 
     public GameComponent(){
         //create objects here
-        Player player=new Player();
+        player=new Player();
         collideableObjects.add(player);
 
         this.scoreRecorder=new ScoreRecorder();
@@ -47,6 +48,15 @@ public class GameComponent extends JComponent{
     public void update(){
 
         throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
+
+    public void restartGame() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'restartGame'");
+    }
+
+    public void playerAction() {
+        player.action();
     }
 
     

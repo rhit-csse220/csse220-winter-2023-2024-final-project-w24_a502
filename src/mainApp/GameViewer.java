@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.TimerTask;
 import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardDownRightHandler;
@@ -39,8 +41,52 @@ public class GameViewer extends JPanel {
 	
 	private void runApp() {
 
+		state=START;
 		
 
+		KeyListener key = new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar()=='p'&&state==RUNNING) {
+					state=PAUSE;//pause if 'p' pressed
+					System.out.println("Game Paused");
+				}else{
+					switch (state) {
+						case START: //start game
+							state = RUNNING; // 
+							System.out.println("Game Start");
+							break;
+						case GAME_OVER: //reset all and start a new game
+							gameComponet.restartGame();
+							state = RUNNING;
+							System.out.println("New Game");
+							break;
+						case PAUSE://continue the game
+							state = RUNNING;
+							System.out.println("Game Continue");
+							break;
+						case RUNNING:
+							gameComponet.playerAction();
+							break;
+						default://will not use if there is no error
+							System.out.println("state wrong!");
+							state=START;
+					}
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				}
+			
+		};
+		this.addKeyListener(key);
 		Timer t = new Timer(DELAY, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -58,6 +104,10 @@ public class GameViewer extends JPanel {
 
 
 	} // runApp
+
+	public int getState() {
+		return state;
+	}
 
 	protected void handleGenerateObjects() {
 		// TODO Auto-generated method stub
