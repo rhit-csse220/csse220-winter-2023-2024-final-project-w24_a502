@@ -2,7 +2,7 @@ package mainApp;
 
 import java.awt.Graphics2D;
 
-public class coin extends CollideableObject {
+public class Coin extends CollideableObject {
 
     @Override
     public void drawOn(Graphics2D g2) {

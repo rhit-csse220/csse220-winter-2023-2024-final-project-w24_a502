@@ -1,5 +1,6 @@
 package mainApp;
 
+import java.awt.Component;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +31,8 @@ public class GameViewer extends JPanel {
 	private Timer timer; 
 	private int intervel = 1000 / 100; // time interval (ms)
 
+	private static Component gameComponet;
+
 	
 	private void runApp() {
 
@@ -42,7 +45,7 @@ public class GameViewer extends JPanel {
 					handleCheckGameOver();
 					
 				}
-				repaint(); // 
+				gameComponet.repaint(); // 
 			}
 
 		}, intervel, intervel);
@@ -68,7 +71,8 @@ public class GameViewer extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 
 		frame.setLocationRelativeTo(null); // set location
 
-		GameComponent gameComponet=new GameComponent();
+		gameComponet=new GameComponent();
+		frame.add(gameComponet);
 
 		frame.setVisible(true); // 
 
