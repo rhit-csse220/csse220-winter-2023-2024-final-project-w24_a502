@@ -11,13 +11,15 @@ public class ScoreRecorder {
     private int numberCoins;
 
     private static int X_POS=0,Y_POS=0;//position of Score
+
+    
     
     public ScoreRecorder(){
 
     }
 
     public void drawOn(Graphics2D g2){
-        
+
         
     }
 

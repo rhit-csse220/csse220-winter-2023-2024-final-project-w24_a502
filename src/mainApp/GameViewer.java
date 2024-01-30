@@ -132,7 +132,7 @@ public class GameViewer extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 
 		frame.setLocationRelativeTo(null); // set location
 
-		gameComponet=new GameComponent();
+		gameComponet=new GameComponent(game);
 		frame.add(gameComponet, BorderLayout.CENTER);
 
 		frame.setVisible(true); // 
