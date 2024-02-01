@@ -5,6 +5,7 @@ import java.awt.geom.Dimension2D;
 
 public class Player extends CollideableObject{
 	private int gravity=5;
+	private static int posY;
     public Player(int x2, int y2, int velX2, int velY2) {
 		super(x2, y2, velX2, velY2);
 		// TODO Auto-generated constructor stub
@@ -19,9 +20,13 @@ public class Player extends CollideableObject{
     	else if(velY<=gravity) {
     		velY=0;
     	}
+    	if(y<=GameViewer.getCeiling()) {
+    		y=GameViewer.getCeiling();
+    	}
     	if(y<=GameViewer.getFloor()) {
     		y=GameViewer.getFloor();
     	}
+    	posY=y;
     }
 	@Override
     public void drawOn(Graphics2D g2) {
@@ -40,5 +45,7 @@ public class Player extends CollideableObject{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'action'");
     }
-   
+   public static int getPosY() {
+	   return posY;
+   }
 }
