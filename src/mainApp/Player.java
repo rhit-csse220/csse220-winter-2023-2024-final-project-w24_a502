@@ -1,10 +1,14 @@
 package mainApp;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Dimension2D;
 
 public class Player extends CollideableObject{
+	private static final double MAX_SPEED = 50;
+	private static final double thrustIncrement = 10;
 	private int gravity=5;
+	private boolean death=false;
 	private static int posY;
     public Player(int x2, int y2, int velX2, int velY2) {
 		super(x2, y2, velX2, velY2);
@@ -29,8 +33,18 @@ public class Player extends CollideableObject{
     }
 	@Override
     public void drawOn(Graphics2D g2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'drawOn'");
+		g2.translate( x,y);
+		
+		if(death) {
+			g2.setColor(Color.RED);
+		}
+		else {
+			g2.setColor(Color.BLUE);
+		}
+		g2.fillRect(0, 0, 80, 20);
+		
+		g2.translate( -x,-y);
+		
     }
 
     @Override
@@ -41,8 +55,11 @@ public class Player extends CollideableObject{
     
     //do actions when any key on key board is pressed
     public void goUp() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'action'");
+        if(velY+thrustIncrement>MAX_SPEED) {
+        	velY=MAX_SPEED;
+        	return;
+        	}
+        velY+=thrustIncrement;
     }
    public static int getPosY() {
 	   return posY;
