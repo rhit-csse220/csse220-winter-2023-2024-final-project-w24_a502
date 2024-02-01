@@ -2,7 +2,7 @@ package mainApp;
 
 import java.awt.Graphics2D;
 
-public class barriers  extends CollideableObject {
+public class Barrier  extends CollideableObject {
 
     
 
