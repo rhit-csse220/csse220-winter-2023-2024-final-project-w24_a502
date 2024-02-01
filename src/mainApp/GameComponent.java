@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -40,11 +41,11 @@ public class GameComponent extends JComponent{
         collideableObjects.add(object);
     }
 
-    public void findGame(int level){
+    public void findLevel(int level){
         String filename="Level"+level+".txt";
 
 		try {
-			loadGame(filename);
+			loadFile(filename);
 			System.out.println();
 		} catch(FileNotFoundException e) {
 			System.err.println("File " + filename + " not found.  Exiting.");
@@ -53,41 +54,23 @@ public class GameComponent extends JComponent{
 		}
     }
 
-    public void loadGame(String filename) throws FileNotFoundException, IOException{
+    public void loadFile(String filename) throws FileNotFoundException, IOException{
         FileReader file = new FileReader(filename);
-		Scanner s = new Scanner(file);
+		BufferedReader reader = new BufferedReader(file);
 
-		while(s.hasNext()) {
-			try {
-                String check=s.next();
-                if (true) {
-                    
-                }
-                int objectIndex = s.nextInt();
-                /* coin=1
-                 * non eletrical barrier=2
-                 * electrical barrier=3
-                 * 
-                 */
-                switch (objectIndex) {
-                    case 1:
-                        
-                        break;
-                
-                    default:
-                        break;
-                }
-			    
-				
-				
-			} catch (InputMismatchException e) {
-				String nonNumber = s.next();
-				System.err.println("Non-number " + nonNumber + " found.  Ignoring.");
-			}
+        String line;
+        while ((line = reader.readLine()) != null) {
+			loadGame(line);
 		}
-        s.close();
+        reader.close();
 		file.close();
 
+    }
+
+    private void loadGame(String line) {
+        line.indexOf(',');
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'loadGame'");
     }
 
     public void levelDown(){
