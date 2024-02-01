@@ -30,7 +30,7 @@ public class coin extends CollideableObject {
     @Override
     public void update() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        super.update();
     }
     
 }

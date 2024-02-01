@@ -14,7 +14,11 @@ import javax.swing.JComponent;
 
 public class GameComponent extends JComponent{
 
-    private ArrayList<CollideableObject> collideableObjects = new ArrayList<CollideableObject>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<CollideableObject> collideableObjects = new ArrayList<CollideableObject>();
     private ScoreRecorder scoreRecorder;
     private Background background;
     private Player player;
@@ -70,7 +74,7 @@ public class GameComponent extends JComponent{
     private void loadGame(String line) {
         line.indexOf(',');
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadGame'");
+       // throw new UnsupportedOperationException("Unimplemented method 'loadGame'");
     }
 
     public void levelDown(){
@@ -133,15 +137,29 @@ public class GameComponent extends JComponent{
     }
 
     private void drawStart(Graphics2D g2) {
-        throw new UnsupportedOperationException("Unimplemented method 'drawStart'");
+        
     }
 
     public void update(){
         for (CollideableObject collideableObject : collideableObjects) {
             collideableObject.update();
         }
+        //System.out.println("hi");
+        handleGenerateObjects();
+        
         
     }
+    public void handleGenerateObjects() {
+    	 System.out.println(GameViewer.random(20));
+		if(GameViewer.random(20)==2) {
+			collideableObjects.add(new Barrier(GameViewer.WIDTH-600,GameViewer.random(GameViewer.HEIGHT), GameViewer.random(200), GameViewer.random(180)-90, GameViewer.random(100)>50));
+		}
+		if(GameViewer.random(4)==2) {
+			collideableObjects.add(new coin(GameViewer.WIDTH-600,GameViewer.random(GameViewer.HEIGHT), 0, 0));
+		}
+		collideableObjects.add(new coin(500,60, 0, 0));
+		
+	}
 
     public void restartGame() {
         // TODO Auto-generated method stub

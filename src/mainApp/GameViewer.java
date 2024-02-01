@@ -41,7 +41,7 @@ public class GameViewer extends JPanel {
 
 	private static GameComponent gameComponet;
 	private ArrayList<CollideableObject> gameObjects = new ArrayList<>();
-	private Player player;
+	
 
 	
 	private void runApp() {
@@ -105,11 +105,12 @@ public class GameViewer extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
-				handleGenerateObjects();
+				
 				handleCheckGameOver();
 				time++;
 				gameComponet.update();
 				gameComponet.repaint();
+				
 			}
 		});
 		
@@ -128,15 +129,11 @@ public class GameViewer extends JPanel {
 	public static int getFloor() {
 		return HEIGHT;
 	}
-	protected void handleGenerateObjects() {
-		if(random(5)==2) {
-			gameObjects.add(new Barrier(WIDTH+600,random(HEIGHT), random(200), random(180)-90, random(100)>50));
-		}
-	}
+	
 
 	protected void handleCheckGameOver() {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'handleCheckGameOver'");
+//		throw new UnsupportedOperationException("Unimplemented method 'handleCheckGameOver'");
 	}
 	
 	/**
