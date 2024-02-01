@@ -22,11 +22,11 @@ public class ScoreRecorder {
     }
 
     public void drawOn(Graphics2D g2){
-        g2.drawString(  "score:"+score+"\n"+
-                        "level:"+level+"\n"+
-                        "distance:"+distance+"\n"+
-                        "numberCoins:"+numberCoins+"\n", 
-                        0, 0);
+        g2.drawString(  "score:"+score+"  "+
+                        "level:"+level+"  "+
+                        "distance:"+distance+"  "+
+                        "numberCoins:"+numberCoins+"  ", 
+                        50, 20);
         
     }
 

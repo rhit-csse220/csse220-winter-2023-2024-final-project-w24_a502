@@ -163,8 +163,8 @@ public class GameComponent extends JComponent{
         //throw new UnsupportedOperationException("Unimplemented method 'restartGame'");
     }
 
-    public void playerGoUp() {
-        player.goUp();
+    public void changeIsFlying(boolean b) {
+        player.changeIsFlying(b);
     }
 
 

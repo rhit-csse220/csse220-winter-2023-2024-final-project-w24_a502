@@ -6,29 +6,34 @@ import java.awt.Graphics2D;
 public class Player extends CollideableObject{
 	private static final double MAX_SPEED = 50;
 	private static final double thrustIncrement = 10;
-	private int gravity=5;
+	private int gravity=1;
 	private boolean death=false;
 	private static int posY;
+    private boolean isFlying;
+
     public Player(int x2, int y2, int velX2, int velY2) {
 		super(x2, y2, velX2, velY2);
+        isFlying=false;
 	}
     @Override
     public void update() {
+        if (isFlying) {
+            velY=-6;
+        }else{
+            velY+=gravity;
+        }
+        
     	
-    	this.y+=velY;
-    	if(velY>gravity) {
-    		velY-=gravity;
-    	}
-    	else if(velY<=gravity) {
-    		velY=0;
-    	}
-    	if(y<=GameViewer.getCeiling()) {
+        this.y+=velY;
+        if(y<=GameViewer.getCeiling()) {
     		y=GameViewer.getCeiling();
     	}
-    	if(y<=GameViewer.getFloor()) {
+    	if(y>=GameViewer.getFloor()) {
     		y=GameViewer.getFloor();
     	}
     	posY=y;
+        
+        System.out.println(y);
     }
 	@Override
     public void drawOn(Graphics2D g2) {
@@ -53,15 +58,13 @@ public class Player extends CollideableObject{
     }
     
     //do actions when any key on key board is pressed
-    public void goUp() {
-        if(velY+thrustIncrement>MAX_SPEED) {
-        	velY=MAX_SPEED;
-        	return;
-        	}
-        velY+=thrustIncrement;
-        System.out.println("go up");
-    }
+
    public static int getPosY() {
 	   return posY;
+   }
+
+   public void changeIsFlying(boolean b){
+        isFlying=b;
+        System.out.println(isFlying);
    }
 }

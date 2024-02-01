@@ -105,7 +105,8 @@ public class GameViewer extends JPanel {
 							gameComponet.levelDown();
 							gameComponet.restartGame();
 						}else if (e.getKeyCode()==32) {//Spacebar=32
-							gameComponet.playerGoUp();
+							gameComponet.changeIsFlying(true);
+							
 						}
 			
 						break;
@@ -119,6 +120,9 @@ public class GameViewer extends JPanel {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode()==32) {//Spacebar=32
+					gameComponet.changeIsFlying(false);
+				}
 			}
 			
 		};
