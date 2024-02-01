@@ -35,7 +35,7 @@ public class GameViewer extends JPanel {
 	private static final int PAUSE = 2;
 	private static final int GAME_OVER = 3;
 	
-	private static final int DELAY = 1000 / 100; // time interval (ms)
+	private static final int DELAY = 1000 /100; // time interval (ms)
 	private static final int MIDPOINT = 700;
 	private static final double GROWTH = 1/100;
 
@@ -73,7 +73,7 @@ public class GameViewer extends JPanel {
 						System.out.println("Game Continue");
 						break;
 					case RUNNING:
-						if (e.getKeyChar()=='p') {
+						if (e.getKeyCode()==80 ) {//'P'=80
 							state=RUNNING;
 						}else if (e.getKeyCode()==38) {//UP=38
 							gameComponet.levelUp();
@@ -81,7 +81,7 @@ public class GameViewer extends JPanel {
 						}else if (e.getKeyCode()==40) {//Down=40
 							gameComponet.levelDown();
 							gameComponet.restartGame();
-						}else if (e.getKeyChar()==' ') {//Spacebar
+						}else if (e.getKeyCode()==32) {//Spacebar=32
 							gameComponet.playerGoUp();
 						}
 			
@@ -105,7 +105,6 @@ public class GameViewer extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
-				
 				//handleCheckGameOver();
 				time++;
 				gameComponet.update();

@@ -156,6 +156,7 @@ public class GameComponent extends JComponent{
 			collideableObjects.add(new coin(GameViewer.WIDTH-600,GameViewer.random(GameViewer.HEIGHT), 0, 0));
 		}
 		collideableObjects.add(new coin(500,60, 0, 0));
+        
 		
 	}
 
