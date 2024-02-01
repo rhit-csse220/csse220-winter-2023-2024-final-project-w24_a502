@@ -1,10 +1,13 @@
 package mainApp;
 
 import java.util.ArrayList;
-
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JComponent;
 
@@ -36,6 +39,42 @@ public class GameComponent extends JComponent{
     public void addObjects(CollideableObject object){
         collideableObjects.add(object);
     }
+
+    public void findGame(int level){
+        String filename="Level"+level+".txt";
+
+		try {
+			loadGame(filename);
+			System.out.println();
+		} catch(FileNotFoundException e) {
+			System.err.println("File " + filename + " not found.  Exiting.");
+		} catch(IOException e) {
+			System.err.println("Error closing file.");
+		}
+    }
+
+    public void loadGame(String filename) throws FileNotFoundException, IOException{
+        FileReader file = new FileReader(filename);
+		Scanner s = new Scanner(file);
+
+		while(s.hasNext()) {
+			try {
+
+                //TODO
+				s.nextInt();
+				
+			} catch (InputMismatchException e) {
+				String nonNumber = s.next();
+				System.err.println("Non-number " + nonNumber + " found.  Ignoring.");
+			}
+		}
+		file.close();
+
+    }
+
+
+
+
 
 
     @Override
