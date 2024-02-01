@@ -19,7 +19,7 @@ public class GameViewer extends JPanel {
 
 
 	//
-
+	private static int speed=1;
 	public static final int WIDTH = 1280; // 
 	public static final int HEIGHT = 720; // 
 
@@ -97,7 +97,7 @@ public class GameViewer extends JPanel {
 			
 				handleGenerateObjects();
 				handleCheckGameOver();
-
+				speed++;
 				gameComponet.update();
 				gameComponet.repaint();
 			}
@@ -111,6 +111,9 @@ public class GameViewer extends JPanel {
 
 	public int getState() {
 		return state;
+	}
+	public static int getGameSpeed() {
+		return speed;
 	}
 
 	protected void handleGenerateObjects() {

@@ -59,8 +59,23 @@ public class GameComponent extends JComponent{
 
 		while(s.hasNext()) {
 			try {
-
-                //TODO
+                int objectIndex = s.nextInt();
+                
+                /* coin=1
+                 * non eletrical barrier=2
+                 * electrical barrier=3
+                 * 
+                 */
+                
+                switch (objectIndex) {
+                    case 1:
+                        
+                        break;
+                
+                    default:
+                        break;
+                }
+			    
 				s.nextInt();
 				
 			} catch (InputMismatchException e) {
