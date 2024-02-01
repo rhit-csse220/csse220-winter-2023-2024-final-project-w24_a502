@@ -14,7 +14,7 @@ public abstract class CollideableObject {
 
     
 
-    public CollideableObject(int x2, int y2, int velX2, int velY2) {
+    public CollideableObject(int x2, int y2, double velX2, double velY2) {
 		this.x=x2;
 		this.y=y2;
 		this.velX=velX2;
