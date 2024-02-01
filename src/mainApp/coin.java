@@ -5,12 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 public class coin extends CollideableObject {
-	private int x;
-	private int y;
+	
 
 	private final static int COIN_RADIUS=30;
 	public coin(int x, int y,int velX,int velY) {
-		super(x,y,velX,velY);
+		super(x,y,0,0);
 		if(this.y+COIN_RADIUS>GameViewer.getFloor()) {
 			this.y=GameViewer.getFloor()-COIN_RADIUS;
 		}
@@ -21,7 +20,7 @@ public class coin extends CollideableObject {
     @Override
     public void drawOn(Graphics2D g2) {
     	g2.translate(x, y);
-    	Ellipse2D coin = new Ellipse2D.Double(0,0, COIN_RADIUS,COIN_RADIUS);
+    	Ellipse2D coin = new Ellipse2D.Double(60,0, COIN_RADIUS,COIN_RADIUS);
     	g2.setColor(Color.black);
         g2.fill(coin);
         g2.translate(-x,-y);
@@ -35,7 +34,7 @@ public class coin extends CollideableObject {
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
+
         super.update();
     }
     

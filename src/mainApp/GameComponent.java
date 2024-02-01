@@ -1,8 +1,7 @@
 package mainApp;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -150,12 +149,12 @@ public class GameComponent extends JComponent{
     public void handleGenerateObjects() {
     	// System.out.println(GameViewer.random(20));
 		if(GameViewer.random(20)==2) {
-			collideableObjects.add(new Barrier(GameViewer.WIDTH-600,GameViewer.random(GameViewer.HEIGHT), GameViewer.random(200), GameViewer.random(180)-90, GameViewer.random(100)>50));
+			collideableObjects.add(new Barrier(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT), GameViewer.random(200), GameViewer.random(180)-90, GameViewer.random(100)>50));
 		}
 		if(GameViewer.random(4)==2) {
-			collideableObjects.add(new coin(GameViewer.WIDTH-600,GameViewer.random(GameViewer.HEIGHT), 0, 0));
+			collideableObjects.add(new coin(GameViewer.WIDTH+600,500+GameViewer.random(GameViewer.HEIGHT), 0, 0));
 		}
-		collideableObjects.add(new coin(500,60, 0, 0));
+		collideableObjects.add(new coin(30,600, 0, 0));
 		
 	}
 
