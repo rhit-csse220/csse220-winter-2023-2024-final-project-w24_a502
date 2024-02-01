@@ -8,6 +8,7 @@ public class Barrier  extends CollideableObject {
 
     public Barrier(int x2, int y2, int velX2, int velY2) {
 		super(x2, y2, velX2, velY2);
+		
 		// TODO Auto-generated constructor stub
 	}
 

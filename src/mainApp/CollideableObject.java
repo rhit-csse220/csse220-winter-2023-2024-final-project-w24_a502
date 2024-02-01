@@ -23,7 +23,10 @@ public abstract class CollideableObject {
     public abstract void overlap();
     public void update() {
     	this.x+=GameViewer.getGameSpeed()+velX;
-    	this.y+=GameViewer.getGameSpeed()+velY;
+    	this.y+=velY;
+    	if(y<=GameViewer.getFloor()) {
+    		y=GameViewer.getFloor();
+    	}
     }
 
 }
