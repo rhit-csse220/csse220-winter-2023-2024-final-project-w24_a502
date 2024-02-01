@@ -72,6 +72,13 @@ public class GameComponent extends JComponent{
 
     }
 
+    public void levelDown(){
+        scoreRecorder.levelDown();
+    }
+    public void levelUp(){
+        scoreRecorder.levelUp();
+    }
+
 
 
 
@@ -129,8 +136,10 @@ public class GameComponent extends JComponent{
     }
 
     public void update(){
-
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        for (CollideableObject collideableObject : collideableObjects) {
+            collideableObject.update(this.getSize());
+        }
+        
     }
 
     public void restartGame() {
@@ -138,9 +147,10 @@ public class GameComponent extends JComponent{
         throw new UnsupportedOperationException("Unimplemented method 'restartGame'");
     }
 
-    public void playerAction() {
-        player.action();
+    public void playerGoUp() {
+        player.goUp();
     }
+
 
     
 

@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Dimension2D;
 
 public class Barrier  extends CollideableObject {
 
@@ -16,6 +17,12 @@ public class Barrier  extends CollideableObject {
     public void overlap() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'overlap'");
+    }
+
+    @Override
+    public void update(Dimension2D dim) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
     
 }

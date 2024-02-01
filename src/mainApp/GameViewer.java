@@ -38,6 +38,7 @@ public class GameViewer extends JPanel {
 
 		state=START;
 		
+		
 
 		KeyListener key = new KeyListener() {
 
@@ -47,32 +48,40 @@ public class GameViewer extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyChar()=='p'&&state==RUNNING) {
-					state=PAUSE;//pause if 'p' pressed
-					System.out.println("Game Paused");
-				}else{
-					switch (state) {
-						case START: //start game
-							state = RUNNING; // 
-							System.out.println("Game Start");
-							break;
-						case GAME_OVER: //reset all and start a new game
+				
+				switch (state) {
+					case START: //start game
+						state = RUNNING; // 
+						System.out.println("Game Start");
+						break;
+					case GAME_OVER: //reset all and start a new game
+						gameComponet.restartGame();
+						state = RUNNING;
+						System.out.println("New Game");
+						break;
+					case PAUSE://continue the game
+						state = RUNNING;
+						System.out.println("Game Continue");
+						break;
+					case RUNNING:
+						if (e.getKeyChar()=='p') {
+							state=RUNNING;
+						}else if (e.getKeyCode()==38) {//UP=38
+							gameComponet.levelUp();
 							gameComponet.restartGame();
-							state = RUNNING;
-							System.out.println("New Game");
-							break;
-						case PAUSE://continue the game
-							state = RUNNING;
-							System.out.println("Game Continue");
-							break;
-						case RUNNING:
-							gameComponet.playerAction();
-							break;
-						default://will not use if there is no error
-							System.out.println("state wrong!");
-							state=START;
-					}
+						}else if (e.getKeyCode()==40) {//Down=40
+							gameComponet.levelDown();
+							gameComponet.restartGame();
+						}else if (e.getKeyChar()==' ') {//Spacebar
+							gameComponet.playerGoUp();
+						}
+			
+						break;
+					default://will not use if there is no error
+						System.out.println("state wrong!");
+						state=START;
 				}
+				
 
 			}
 

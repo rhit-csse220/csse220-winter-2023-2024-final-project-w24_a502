@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Dimension2D;
 
 public abstract class CollideableObject {
 
@@ -15,5 +16,6 @@ public abstract class CollideableObject {
 
     public abstract void drawOn(Graphics2D g2);
     public abstract void overlap();
+    public abstract void update(Dimension2D dim);
 
 }
