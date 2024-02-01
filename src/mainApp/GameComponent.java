@@ -152,7 +152,7 @@ public class GameComponent extends JComponent{
 
     public void update(){
         for (CollideableObject collideableObject : collideableObjects) {
-            collideableObject.update(this.getSize());
+            collideableObject.update();
         }
         
     }

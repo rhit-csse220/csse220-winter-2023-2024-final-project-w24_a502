@@ -23,7 +23,7 @@ public class Player extends CollideableObject{
     }
     
     //do actions when any key on key board is pressed
-    public void action() {
+    public void goUp() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'action'");
     }

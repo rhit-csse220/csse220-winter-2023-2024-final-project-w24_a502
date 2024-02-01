@@ -28,7 +28,7 @@ public class coin extends CollideableObject {
     }
 
     @Override
-    public void update(Dimension2D dim) {
+    public void update() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
