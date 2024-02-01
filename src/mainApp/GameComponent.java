@@ -59,14 +59,16 @@ public class GameComponent extends JComponent{
 
 		while(s.hasNext()) {
 			try {
+                String check=s.next();
+                if () {
+                    
+                }
                 int objectIndex = s.nextInt();
-                
                 /* coin=1
                  * non eletrical barrier=2
                  * electrical barrier=3
                  * 
                  */
-                
                 switch (objectIndex) {
                     case 1:
                         
@@ -76,13 +78,14 @@ public class GameComponent extends JComponent{
                         break;
                 }
 			    
-				s.nextInt();
+				
 				
 			} catch (InputMismatchException e) {
 				String nonNumber = s.next();
 				System.err.println("Non-number " + nonNumber + " found.  Ignoring.");
 			}
 		}
+        s.close();
 		file.close();
 
     }
