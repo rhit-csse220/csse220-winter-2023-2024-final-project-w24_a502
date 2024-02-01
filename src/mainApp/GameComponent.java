@@ -137,7 +137,7 @@ public class GameComponent extends JComponent{
     }
 
     private void drawStart(Graphics2D g2) {
-        
+        g2.drawString("Press any key to start", 50, 50);
     }
 
     public void update(){

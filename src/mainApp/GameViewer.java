@@ -45,10 +45,9 @@ public class GameViewer extends JPanel {
 
 	
 	private void runApp() {
-
+		this.setFocusable(true);
+		this.requestFocusInWindow(); 
 		state=START;
-		
-		
 
 		KeyListener key = new KeyListener() {
 
@@ -97,16 +96,17 @@ public class GameViewer extends JPanel {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				}
+			}
 			
 		};
 		this.addKeyListener(key);
+		
 		Timer t = new Timer(DELAY, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
 				
-				handleCheckGameOver();
+				//handleCheckGameOver();
 				time++;
 				gameComponet.update();
 				gameComponet.repaint();
@@ -148,6 +148,7 @@ public class GameViewer extends JPanel {
 		frame.setAlwaysOnTop(true); // set on top
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 
 		frame.setLocationRelativeTo(null); // set location
+
 
 		gameComponet=new GameComponent(game);
 		frame.add(gameComponet, BorderLayout.CENTER);
