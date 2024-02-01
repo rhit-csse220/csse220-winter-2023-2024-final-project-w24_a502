@@ -19,7 +19,7 @@ public class Barrier  extends CollideableObject {
 		if(this.y+this.length*Math.sin((this.theta*Math.PI)/180.0)>GameViewer.getFloor()) {
 			this.y=(int) (GameViewer.getFloor()-this.length*Math.sin((this.theta*Math.PI)/180.0));
 		}//forces the barrier to be with bounds of ceiling and floor
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -44,9 +44,9 @@ public class Barrier  extends CollideableObject {
         throw new UnsupportedOperationException("Unimplemented method 'overlap'");
     }
 
-    @Override
-    public void update() {
-        super.update();
-    }
+    // @Override
+    // public void update() {
+    //     super.update();
+    // }
     
 }

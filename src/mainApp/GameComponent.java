@@ -117,13 +117,11 @@ public class GameComponent extends JComponent{
 
 
     private void drawGameOver(Graphics2D g2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'drawGameOver'");
+        g2.drawString("Game Over!", 50, 50);
     }
 
     private void drawPause(Graphics2D g2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'drawPause'");
+        g2.drawString("Game Paused", 50, 50);
     }
 
     private void drawRuning(Graphics2D g2) {
@@ -163,7 +161,7 @@ public class GameComponent extends JComponent{
 
     public void restartGame() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'restartGame'");
+        //throw new UnsupportedOperationException("Unimplemented method 'restartGame'");
     }
 
     public void playerGoUp() {

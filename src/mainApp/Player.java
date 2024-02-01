@@ -50,7 +50,7 @@ public class Player extends CollideableObject{
     @Override
     public void overlap() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'overlap'");
+        //throw new UnsupportedOperationException("Unimplemented method 'overlap'");
     }
     
     //do actions when any key on key board is pressed
