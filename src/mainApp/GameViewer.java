@@ -32,24 +32,41 @@ public class GameViewer extends JPanel {
 	public static final int WIDTH = 1280; // 
 	public static final int HEIGHT = 720; // 
 
-	private int state;
+	private static int state;
 	private static final int START = 0;
 	private static final int RUNNING = 1;
 	private static final int PAUSE = 2;
 	private static final int GAME_OVER = 3;
 	
-	private static final int DELAY = 1000 / 100; // time interval (ms)
-	private static final int MIDPOINT = 7000000;
-	private static final double GROWTH = 1/10000;
+
+	private static final int DELAY = 1000 /100; // time interval (ms)
+	private static final int MIDPOINT = 7000;
+	private static final double GROWTH = 1/100;
 
 	private static GameComponent gameComponet;
 	
 
 	
 	private void runApp() {
+		Timer t = new Timer(DELAY, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			
+				//handleCheckGameOver();
+				time++;
+				gameComponet.update();
+				gameComponet.repaint();
+				
+			}
+		});
+		
+		//Starts the simulator
+		
 		this.setFocusable(true);
 		this.requestFocusInWindow(); 
 		state=START;
+		t.stop();
 
 		KeyListener key = new KeyListener() {
 
@@ -63,27 +80,32 @@ public class GameViewer extends JPanel {
 				switch (state) {
 					case START: //start game
 						state = RUNNING; // 
+						t.start();
 						System.out.println("Game Start");
 						break;
 					case GAME_OVER: //reset all and start a new game
 						gameComponet.restartGame();
 						state = RUNNING;
+						t.stop();
 						System.out.println("New Game");
 						break;
 					case PAUSE://continue the game
 						state = RUNNING;
+					 	t.start();
 						System.out.println("Game Continue");
 						break;
 					case RUNNING:
-						if (e.getKeyChar()=='p') {
-							state=RUNNING;
+						if (e.getKeyCode()==80 ) {//'P'=80
+							state=PAUSE;
+							gameComponet.repaint();
+							t.stop();
 						}else if (e.getKeyCode()==38) {//UP=38
 							gameComponet.levelUp();
 							gameComponet.restartGame();
 						}else if (e.getKeyCode()==40) {//Down=40
 							gameComponet.levelDown();
 							gameComponet.restartGame();
-						}else if (e.getKeyChar()==' ') {//Spacebar
+						}else if (e.getKeyCode()==32) {//Spacebar=32
 							gameComponet.playerGoUp();
 						}
 			
@@ -103,26 +125,12 @@ public class GameViewer extends JPanel {
 		};
 		this.addKeyListener(key);
 		
-		Timer t = new Timer(DELAY, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-			
-				
-				//handleCheckGameOver();
-				time++;
-				gameComponet.update();
-				gameComponet.repaint();
-				
-			}
-		});
 		
-		//Starts the simulator
-		t.start();
 
 
 	} // runApp
 
-	public int getState() {
+	public static int getState() {
 		return state;
 	}
 	public static int getGameSpeed() {
@@ -152,7 +160,7 @@ public class GameViewer extends JPanel {
 		frame.setLocationRelativeTo(null); // set location
 
 
-		gameComponet=new GameComponent(game);
+		gameComponet=new GameComponent();
 		frame.add(gameComponet, BorderLayout.CENTER);
 
 		frame.setVisible(true); // 

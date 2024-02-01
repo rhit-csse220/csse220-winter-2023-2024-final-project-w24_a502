@@ -29,13 +29,13 @@ public class GameComponent extends JComponent{
 	private static final int GAME_OVER = 3;
 
 
-    public GameComponent(GameViewer game){
+    public GameComponent(){
         //create objects here
         player=new Player(500, 300, 30, 40);
        
         this.scoreRecorder=new ScoreRecorder();
         this.background=new Background();
-        this.game=game;
+        
 
     }
 
@@ -92,7 +92,7 @@ public class GameComponent extends JComponent{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-        switch (game.getState()) {//draw according to state
+        switch (GameViewer.getState()) {//draw according to state
             case START:
                 drawStart(g2);
                 break;

@@ -60,6 +60,7 @@ public class Player extends CollideableObject{
         	return;
         	}
         velY+=thrustIncrement;
+        System.out.println("go up");
     }
    public static int getPosY() {
 	   return posY;
