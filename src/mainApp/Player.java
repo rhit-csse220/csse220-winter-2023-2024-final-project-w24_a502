@@ -40,8 +40,5 @@ public class Player extends CollideableObject{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'action'");
     }
-    public void goUp() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'action'");
-    }
+   
 }
