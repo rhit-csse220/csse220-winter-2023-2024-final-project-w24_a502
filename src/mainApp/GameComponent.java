@@ -27,7 +27,7 @@ public class GameComponent extends JComponent{
 
     public GameComponent(GameViewer game){
         //create objects here
-        player=new Player();
+        player=new Player(20, 300, 30, 40);
         collideableObjects.add(player);
 
         this.scoreRecorder=new ScoreRecorder();

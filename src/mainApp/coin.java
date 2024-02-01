@@ -6,11 +6,11 @@ import java.awt.geom.Ellipse2D;
 public class coin extends CollideableObject {
 	private int x;
 	private int y;
-	private int GLOBAL_SPEED;
+
 	private final static int COIN_RADIUS=30;
-	public coin(int x, int y) {
-		this.x=x;
-		this.y=y;
+	public coin(int x, int y,int velX,int velY) {
+		super(x,y,velX,velY);
+		
 	}
     @Override
     public void drawOn(Graphics2D g2) {
