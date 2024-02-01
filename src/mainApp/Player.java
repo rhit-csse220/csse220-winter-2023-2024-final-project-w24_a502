@@ -8,7 +8,20 @@ public class Player extends CollideableObject{
 		super(x2, y2, velX2, velY2);
 		// TODO Auto-generated constructor stub
 	}
-    
+    @Override
+    public void update() {
+    	
+    	this.y+=velY;
+    	if(velY>gravity) {
+    		velY-=gravity;
+    	}
+    	else if(velY<=gravity) {
+    		velY=0;
+    	}
+    	if(y<=GameViewer.getFloor()) {
+    		y=GameViewer.getFloor();
+    	}
+    }
 	@Override
     public void drawOn(Graphics2D g2) {
         // TODO Auto-generated method stub
@@ -26,5 +39,8 @@ public class Player extends CollideableObject{
         if(velY>20)
         throw new UnsupportedOperationException("Unimplemented method 'action'");
     }
-
+    public void goUp() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'action'");
+    }
 }
