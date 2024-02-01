@@ -4,8 +4,13 @@ import java.awt.Graphics2D;
 import java.awt.geom.Dimension2D;
 
 public class Player extends CollideableObject{
-
-    @Override
+	private int gravity=5;
+    public Player(int x2, int y2, int velX2, int velY2) {
+		super(x2, y2, velX2, velY2);
+		// TODO Auto-generated constructor stub
+	}
+    
+	@Override
     public void drawOn(Graphics2D g2) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'drawOn'");
@@ -18,22 +23,9 @@ public class Player extends CollideableObject{
     }
     
     //do actions when any key on key board is pressed
-    public void goUp() {
-        velY=1;
-    }
-
-    public void update(Dimension2D dim){
-        x += velX;
-        y += velY;
-        if (x > dim.getWidth() || x < 0) {
-            x = (int) Math.min(Math.max(x, 0), dim.getWidth());
-            velX = -velX;
-        }
-        if (y > dim.getHeight() || y < 0) {
-            velY = -velY;
-            y = (int) Math.min(Math.max(y, 0), dim.getHeight());
-        }
-        velY=0;
+    public void action() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'action'");
     }
 
 }

@@ -115,7 +115,9 @@ public class GameViewer extends JPanel {
 	public static int getGameSpeed() {
 		return speed;
 	}
-
+	public static int getFloor() {
+		return HEIGHT;
+	}
 	protected void handleGenerateObjects() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'handleGenerateObjects'");
