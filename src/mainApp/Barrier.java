@@ -13,10 +13,10 @@ public class Barrier  extends CollideableObject {
 		super(x2, y2, 0, 0);
 		this.theta=theta;
 		this.electrified=electrified;
-		if(this.y+this.length*Math.sin((this.theta*Math.PI)/180.0)<GameViewer.getCeiling()) {
-			this.y=(int) (GameViewer.getCeiling()-this.length*Math.sin((this.theta*Math.PI)/180.0));
+		if(this.y-this.length*Math.sin((this.theta*Math.PI)/180.0)<GameViewer.getCeiling()) {
+			this.y=(int) (GameViewer.getCeiling()+this.length*Math.sin((this.theta*Math.PI)/180.0));
 		}
-		if(this.y+this.length*Math.sin((this.theta*Math.PI)/180.0)<GameViewer.getFloor()) {
+		if(this.y+this.length*Math.sin((this.theta*Math.PI)/180.0)>GameViewer.getFloor()) {
 			this.y=(int) (GameViewer.getFloor()-this.length*Math.sin((this.theta*Math.PI)/180.0));
 		}//forces the barrier to be with bounds of ceiling and floor
 		// TODO Auto-generated constructor stub
