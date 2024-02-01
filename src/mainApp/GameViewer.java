@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Random;
+
 import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,8 +22,10 @@ public class GameViewer extends JPanel {
 
 
 	//
+	
 	private static int ceiling =0;
-	private static int speed=1;
+	private static int time=1;
+	private static final int MAX_SPEED=40;
 	public static final int WIDTH = 1280; // 
 	public static final int HEIGHT = 720; // 
 
@@ -31,8 +36,12 @@ public class GameViewer extends JPanel {
 	private static final int GAME_OVER = 3;
 	
 	private static final int DELAY = 1000 / 100; // time interval (ms)
+	private static final int MIDPOINT = 700;
+	private static final int GROWTH = 1;
 
 	private static GameComponent gameComponet;
+	private ArrayList<CollideableObject> gameObjects = new ArrayList<>();
+	private Player player;
 
 	
 	private void runApp() {
@@ -98,7 +107,7 @@ public class GameViewer extends JPanel {
 			
 				handleGenerateObjects();
 				handleCheckGameOver();
-				speed++;
+				time++;
 				gameComponet.update();
 				gameComponet.repaint();
 			}
@@ -114,21 +123,22 @@ public class GameViewer extends JPanel {
 		return state;
 	}
 	public static int getGameSpeed() {
-		return speed;
+		return  (int)(-MAX_SPEED*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT))))));
 	}
 	public static int getFloor() {
 		return HEIGHT;
 	}
 	protected void handleGenerateObjects() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'handleGenerateObjects'");
+		if(random(5)==2) {
+			gameObjects.add(new Barrier(WIDTH+600,random(HEIGHT), random(200), random(180)-90, random(100)>50));
+		}
 	}
 
 	protected void handleCheckGameOver() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'handleCheckGameOver'");
 	}
-
+	
 	/**
 	 * ensures: runs the application
 	 * @param args unused
@@ -153,6 +163,10 @@ public class GameViewer extends JPanel {
 	public static int getCeiling() {
 		// TODO Auto-generated method stub
 		return ceiling;
+	}
+	public static int random(int upperBound) {
+		Random rand = new Random();
+		return rand.nextInt(upperBound);
 	}
 
 }
