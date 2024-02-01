@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -23,6 +22,10 @@ public class GameViewer extends JPanel {
 
 	//
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int ceiling =0;
 	private static int time=1;
 	private static final int MAX_SPEED=40;
@@ -40,7 +43,6 @@ public class GameViewer extends JPanel {
 	private static final double GROWTH = 1/100;
 
 	private static GameComponent gameComponet;
-	private ArrayList<CollideableObject> gameObjects = new ArrayList<>();
 	
 
 	
