@@ -60,7 +60,7 @@ public class GameComponent extends JComponent{
 		while(s.hasNext()) {
 			try {
                 String check=s.next();
-                if () {
+                if (true) {
                     
                 }
                 int objectIndex = s.nextInt();
