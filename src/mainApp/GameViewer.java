@@ -19,6 +19,7 @@ public class GameViewer extends JPanel {
 
 
 	//
+	private static int ceiling =0;
 	private static int speed=1;
 	public static final int WIDTH = 1280; // 
 	public static final int HEIGHT = 720; // 
@@ -148,5 +149,10 @@ public class GameViewer extends JPanel {
 
 		game.runApp(); // start game	
 	} // main
+
+	public static int getCeiling() {
+		// TODO Auto-generated method stub
+		return ceiling;
+	}
 
 }
