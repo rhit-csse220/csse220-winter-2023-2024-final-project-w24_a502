@@ -37,7 +37,7 @@ public class Player extends CollideableObject{
     }
 	@Override
     public void drawOn(Graphics2D g2) {
-		g2.translate( x,y);
+		g2.translate(x,y);
 		
 		if(death) {
 			g2.setColor(Color.RED);
