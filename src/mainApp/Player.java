@@ -28,8 +28,8 @@ public class Player extends CollideableObject{
         if(y<=GameViewer.getCeiling()) {
     		y=GameViewer.getCeiling();
     	}
-    	if(y>=GameViewer.getFloor()) {
-    		y=GameViewer.getFloor();
+    	if(y>=GameViewer.getFloor()-60) {
+    		y=GameViewer.getFloor()-60;
     	}
     	posY=y;
         
