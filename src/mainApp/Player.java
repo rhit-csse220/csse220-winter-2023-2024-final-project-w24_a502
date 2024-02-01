@@ -10,7 +10,7 @@ public class Player extends CollideableObject{
 	private boolean death=false;
 	private static int posY;
     public Player(int x2, int y2, int velX2, int velY2) {
-		super(x2, y2, velX2, velY2);
+		super(x2, y2, 0, 0);
 	}
     @Override
     public void update() {
@@ -29,17 +29,18 @@ public class Player extends CollideableObject{
     		y=GameViewer.getFloor();
     	}
     	posY=y;
+    	System.out.print(y);
     }
 	@Override
     public void drawOn(Graphics2D g2) {
-		g2.translate( x,y);
-		
-		if(death) {
-			g2.setColor(Color.RED);
-		}
-		else {
-			g2.setColor(Color.BLUE);
-		}
+		g2.translate(x,y);
+		g2.setColor(Color.RED);
+//		if(death) {
+//			g2.setColor(Color.RED);
+//		}
+//		else {
+//			g2.setColor(Color.BLUE);
+//		}
 		g2.fillRect(0, 0, 80, 20);
 		
 		g2.translate( -x,-y);

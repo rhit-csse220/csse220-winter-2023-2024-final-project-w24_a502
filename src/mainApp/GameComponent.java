@@ -31,9 +31,8 @@ public class GameComponent extends JComponent{
 
     public GameComponent(GameViewer game){
         //create objects here
-        player=new Player(20, 300, 30, 40);
-        collideableObjects.add(player);
-
+        player=new Player(500, 300, 30, 40);
+       
         this.scoreRecorder=new ScoreRecorder();
         this.background=new Background();
         this.game=game;
@@ -129,6 +128,7 @@ public class GameComponent extends JComponent{
 		for (CollideableObject collideableObject : collideableObjects) {
 			collideableObject.drawOn(g2);
 		}
+		player.drawOn(g2);
 
         scoreRecorder.drawOn(g2);
     }
@@ -141,6 +141,7 @@ public class GameComponent extends JComponent{
         for (CollideableObject collideableObject : collideableObjects) {
             collideableObject.update();
         }
+        player.update();
         //System.out.println("hi");
         handleGenerateObjects();
         
@@ -148,13 +149,13 @@ public class GameComponent extends JComponent{
     }
     public void handleGenerateObjects() {
     	// System.out.println(GameViewer.random(20));
-		if(GameViewer.random(20)==2) {
-			collideableObjects.add(new Barrier(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT), GameViewer.random(200), GameViewer.random(180)-90, GameViewer.random(100)>50));
+		if(GameViewer.random(30)==2) {
+			collideableObjects.add(new Barrier(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT),100+ GameViewer.random(100), GameViewer.random(180)-90, GameViewer.random(100)>50));
 		}
-		if(GameViewer.random(4)==2) {
+		if(GameViewer.random(20)==2) {
 			collideableObjects.add(new coin(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT), 0, 0));
 		}
-		//collideableObjects.add(new coin(30,600, 0, 0));
+		
 		
 	}
 
