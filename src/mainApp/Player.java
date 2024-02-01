@@ -25,8 +25,8 @@ public class Player extends CollideableObject{
     	if(y<=GameViewer.getCeiling()) {
     		y=GameViewer.getCeiling();
     	}
-    	if(y<=GameViewer.getFloor()) {
-    		y=GameViewer.getFloor();
+    	if(y>=GameViewer.getFloor()-40) {
+    		y=GameViewer.getFloor()-40;
     	}
     	posY=y;
     	System.out.print(y);
@@ -34,13 +34,13 @@ public class Player extends CollideableObject{
 	@Override
     public void drawOn(Graphics2D g2) {
 		g2.translate(x,y);
-		g2.setColor(Color.RED);
-//		if(death) {
-//			g2.setColor(Color.RED);
-//		}
-//		else {
-//			g2.setColor(Color.BLUE);
-//		}
+		
+		if(death) {
+			g2.setColor(Color.RED);
+		}
+		else {
+			g2.setColor(Color.BLUE);
+		}
 		g2.fillRect(0, 0, 80, 20);
 		
 		g2.translate( -x,-y);
