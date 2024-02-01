@@ -26,5 +26,11 @@ public class coin extends CollideableObject {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'overlap'");
     }
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
     
 }

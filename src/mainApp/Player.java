@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Dimension2D;
 
 public class Player extends CollideableObject{
 	private int gravity=5;
@@ -35,8 +36,8 @@ public class Player extends CollideableObject{
     }
     
     //do actions when any key on key board is pressed
-    public void action() {
-        if(velY>20)
+    public void goUp() {
+        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'action'");
     }
     public void goUp() {

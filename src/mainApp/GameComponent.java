@@ -59,8 +59,23 @@ public class GameComponent extends JComponent{
 
 		while(s.hasNext()) {
 			try {
-
-                //TODO
+                int objectIndex = s.nextInt();
+                
+                /* coin=1
+                 * non eletrical barrier=2
+                 * electrical barrier=3
+                 * 
+                 */
+                
+                switch (objectIndex) {
+                    case 1:
+                        
+                        break;
+                
+                    default:
+                        break;
+                }
+			    
 				s.nextInt();
 				
 			} catch (InputMismatchException e) {
@@ -70,6 +85,13 @@ public class GameComponent extends JComponent{
 		}
 		file.close();
 
+    }
+
+    public void levelDown(){
+        scoreRecorder.levelDown();
+    }
+    public void levelUp(){
+        scoreRecorder.levelUp();
     }
 
 
@@ -129,8 +151,10 @@ public class GameComponent extends JComponent{
     }
 
     public void update(){
-
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        for (CollideableObject collideableObject : collideableObjects) {
+            collideableObject.update();
+        }
+        
     }
 
     public void restartGame() {
@@ -138,9 +162,10 @@ public class GameComponent extends JComponent{
         throw new UnsupportedOperationException("Unimplemented method 'restartGame'");
     }
 
-    public void playerAction() {
-        player.action();
+    public void playerGoUp() {
+        player.goUp();
     }
+
 
     
 

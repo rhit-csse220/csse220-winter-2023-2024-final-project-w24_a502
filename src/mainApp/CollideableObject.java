@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Dimension2D;
 
 public abstract class CollideableObject {
 
