@@ -150,7 +150,7 @@ public class GameComponent extends JComponent{
         
     }
     public void handleGenerateObjects() {
-    	 System.out.println(GameViewer.random(20));
+    	// System.out.println(GameViewer.random(20));
 		if(GameViewer.random(20)==2) {
 			collideableObjects.add(new Barrier(GameViewer.WIDTH-600,GameViewer.random(GameViewer.HEIGHT), GameViewer.random(200), GameViewer.random(180)-90, GameViewer.random(100)>50));
 		}

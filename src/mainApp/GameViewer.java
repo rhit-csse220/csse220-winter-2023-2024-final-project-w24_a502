@@ -37,7 +37,7 @@ public class GameViewer extends JPanel {
 	
 	private static final int DELAY = 1000 / 100; // time interval (ms)
 	private static final int MIDPOINT = 700;
-	private static final int GROWTH = 1;
+	private static final double GROWTH = 1/100;
 
 	private static GameComponent gameComponet;
 	private ArrayList<CollideableObject> gameObjects = new ArrayList<>();
@@ -124,7 +124,7 @@ public class GameViewer extends JPanel {
 		return state;
 	}
 	public static int getGameSpeed() {
-		return  (int)(-MAX_SPEED*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT))))));
+		return (int)(-MAX_SPEED*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT))))));
 	}
 	public static int getFloor() {
 		return HEIGHT;
