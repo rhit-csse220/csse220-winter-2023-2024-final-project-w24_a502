@@ -152,9 +152,9 @@ public class GameComponent extends JComponent{
 			collideableObjects.add(new Barrier(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT), GameViewer.random(200), GameViewer.random(180)-90, GameViewer.random(100)>50));
 		}
 		if(GameViewer.random(4)==2) {
-			collideableObjects.add(new coin(GameViewer.WIDTH+600,500+GameViewer.random(GameViewer.HEIGHT), 0, 0));
+			collideableObjects.add(new coin(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT), 0, 0));
 		}
-		collideableObjects.add(new coin(30,600, 0, 0));
+		//collideableObjects.add(new coin(30,600, 0, 0));
 		
 	}
 
