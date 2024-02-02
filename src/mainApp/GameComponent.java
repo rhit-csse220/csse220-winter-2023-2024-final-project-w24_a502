@@ -1,7 +1,9 @@
 package mainApp;
 
 import java.util.ArrayList;
-
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -23,6 +25,17 @@ public class GameComponent extends JComponent{
     private Player player;
     GameViewer game;
 
+    private ArrayList<Integer> timeToAdd=new ArrayList<Integer>();
+    private ArrayList<Integer> ObjectToAdd=new ArrayList<Integer>();
+    private ArrayList<Integer> sizeOfObject=new ArrayList<Integer>();
+    private ArrayList<Integer> positionOfObject=new ArrayList<Integer>();
+    private ArrayList<Integer> angleOfObject=new ArrayList<Integer>();
+
+    private static final int Electrified_Barrier = 0;
+	private static final int Non_Electric_Barrier = 1;
+	private static final int Coin = 2;
+	private static final int Missile = 3;
+
     private static final int START = 0;
 	private static final int RUNNING = 1;
 	private static final int PAUSE = 2;
@@ -43,36 +56,93 @@ public class GameComponent extends JComponent{
         collideableObjects.add(object);
     }
 
-    public void findLevel(int level){
+    public void loadLevel(int level) throws InvalidLevelFormatException{
         String filename="Level"+level+".txt";
 
 		try {
 			loadFile(filename);
 			System.out.println();
 		} catch(FileNotFoundException e) {
-			System.err.println("File " + filename + " not found.  Exiting.");
+			System.err.println("File " + filename + " not found.");
 		} catch(IOException e) {
 			System.err.println("Error closing file.");
 		}
     }
 
-    public void loadFile(String filename) throws FileNotFoundException, IOException{
+    public void loadFile(String filename) throws FileNotFoundException, IOException, InvalidLevelFormatException{
         FileReader file = new FileReader(filename);
 		BufferedReader reader = new BufferedReader(file);
+        System.out.println("file loaded");
 
         String line;
-        while ((line = reader.readLine()) != null) {
-			loadGame(line);
-		}
+        try {
+            
+            while ((line = reader.readLine()) != null) {
+                
+                try {
+                        loadObject(line);
+                        
+                        
+                    
+                } catch (InvalidLevelFormatException e) {
+                    System.err.println(e.getMessage()+" Skipped");
+                
+                } 
+            }
+        }catch(IOException e){
+            System.err.println("I don't know what's happening");
+        }
+        
         reader.close();
 		file.close();
 
     }
 
-    private void loadGame(String line) {
-        line.indexOf(',');
-        // TODO Auto-generated method stub
-       // throw new UnsupportedOperationException("Unimplemented method 'loadGame'");
+    @SuppressWarnings("resource")
+    private void loadObject(String line) throws InvalidLevelFormatException,InputMismatchException{
+        Scanner s1 = new Scanner(line);
+        try {
+            int i=s1.nextInt();
+            if (i<0) {throw new InvalidLevelFormatException(line);}
+            timeToAdd.add(i);
+
+            i=s1.nextInt();
+            if (i<0||i>3) {throw new InvalidLevelFormatException(line);}
+            ObjectToAdd.add(i);
+
+            i=s1.nextInt();
+            if (i<0||i>720) {throw new InvalidLevelFormatException(line);}
+            positionOfObject.add(i);
+
+            i=s1.nextInt();
+            if (i<0||i>200) {throw new InvalidLevelFormatException(line);}
+            sizeOfObject.add(i);
+
+            i=s1.nextInt();
+            if (i<-90||i>90) {throw new InvalidLevelFormatException(line);}
+            angleOfObject.add(i);
+            System.err.println(angleOfObject.size()+"th Objects loaded");
+            
+        } catch (InputMismatchException e) {
+            System.err.println("Invalid format: "+line+ "  does not follow standard format rules(TIME NAME Y-POSITION SIZE ANGLE). Skipped.");
+        } catch(NoSuchElementException e){
+            System.err.println("Invalid format: "+line+ "  does not follow standard format rules(TIME NAME Y-POSITION SIZE ANGLE). Skipped.");
+        }finally{
+            
+            if (timeToAdd.size()>angleOfObject.size()) {
+                timeToAdd.remove(angleOfObject.size());
+            }
+            if (ObjectToAdd.size()>angleOfObject.size()) {
+                ObjectToAdd.remove(angleOfObject.size());
+            }
+            if (positionOfObject.size()>angleOfObject.size()) {
+                positionOfObject.remove(angleOfObject.size());
+            }
+        }
+        
+
+
+        s1.close();
     }
 
     public void levelDown(){
@@ -144,10 +214,55 @@ public class GameComponent extends JComponent{
         player.update();
         //System.out.println("hi");
         handleGenerateObjects();
+
+        //handleGenerateObjectsRandomly();
         
         
     }
-    public void handleGenerateObjects() {
+    private void handleGenerateObjects() {
+        if (timeToAdd.isEmpty()) {
+            return;
+        }
+        if (Math.abs(timeToAdd.get(0)-GameViewer.getTime())<10) {
+            timeToAdd.remove(0);
+            switch (ObjectToAdd.remove(0)) {
+                case Electrified_Barrier:
+                    collideableObjects.add(
+                        new Barrier(
+                            GameViewer.WIDTH, 
+                            positionOfObject.remove(0), 
+                            sizeOfObject.remove(0), 
+                            angleOfObject.remove(0),
+                            true));
+                    break;
+                case Non_Electric_Barrier:
+                    collideableObjects.add(
+                        new Barrier(
+                            GameViewer.WIDTH, 
+                            positionOfObject.remove(0), 
+                            sizeOfObject.remove(0), 
+                            angleOfObject.remove(0),
+                            false));
+                
+                    break;
+                case Coin:
+                    collideableObjects.add(
+                        new coin(
+                            GameViewer.WIDTH, 
+                            positionOfObject.remove(0), 
+                            0, 0));
+                    sizeOfObject.remove(0);
+                    angleOfObject.remove(0);
+                    break;   
+                
+            
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void handleGenerateObjectsRandomly() {
     	// System.out.println(GameViewer.random(20));
 		if(GameViewer.random(30)==2) {
 			collideableObjects.add(new Barrier(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT),100+ GameViewer.random(100), GameViewer.random(180)-90, GameViewer.random(100)>50));
@@ -160,8 +275,12 @@ public class GameComponent extends JComponent{
 	}
 
     public void restartGame() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'restartGame'");
+        collideableObjects.clear();
+        timeToAdd.clear();
+        sizeOfObject.clear();
+        positionOfObject.clear();
+        angleOfObject.clear();
+        
     }
 
     public void changeIsFlying(boolean b) {

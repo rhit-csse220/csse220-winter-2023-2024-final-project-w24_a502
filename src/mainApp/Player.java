@@ -40,7 +40,6 @@ public class Player extends CollideableObject{
     	}
     	posY=y;
         
-        System.out.println(y);
     }
 	@Override
     public void drawOn(Graphics2D g2) {
@@ -72,6 +71,5 @@ public class Player extends CollideableObject{
 
    public void changeIsFlying(boolean b){
         isFlying=b;
-        System.out.println(isFlying);
    }
 }

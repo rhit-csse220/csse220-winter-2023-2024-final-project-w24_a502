@@ -2,11 +2,12 @@ package mainApp;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.logging.Level;
 
 public class ScoreRecorder {
 
     private int score; 
-	private int level;
+	private static int level;
     private int distance;
     private int numberCoins;
 
@@ -48,6 +49,10 @@ public class ScoreRecorder {
             level=1;
             System.out.println("You are alreay at lowest level");
         }
+    }
+
+    public static int getLevel() {
+        return level;
     }
 
 
