@@ -25,11 +25,8 @@ public class GameComponent extends JComponent{
     private Player player;
     GameViewer game;
 
-    private ArrayList<Integer> timeToAdd=new ArrayList<Integer>();
-    private ArrayList<Integer> ObjectToAdd=new ArrayList<Integer>();
-    private ArrayList<Integer> sizeOfObject=new ArrayList<Integer>();
-    private ArrayList<Integer> positionOfObject=new ArrayList<Integer>();
-    private ArrayList<Integer> angleOfObject=new ArrayList<Integer>();
+    private ArrayList<toAddObjects> ObjectsToAdd=new ArrayList<toAddObjects>();
+    
 
     private static final int Electrified_Barrier = 0;
 	private static final int Non_Electric_Barrier = 1;
@@ -102,26 +99,29 @@ public class GameComponent extends JComponent{
     private void loadObject(String line) throws InvalidLevelFormatException,InputMismatchException{
         Scanner s1 = new Scanner(line);
         try {
-            int i=s1.nextInt();
-            if (i<0) {throw new InvalidLevelFormatException(line);}
-            timeToAdd.add(i);
+            int time=s1.nextInt();
+            if (time<0) {throw new InvalidLevelFormatException(line);}
+            
 
-            i=s1.nextInt();
-            if (i<0||i>3) {throw new InvalidLevelFormatException(line);}
-            ObjectToAdd.add(i);
+            int name=s1.nextInt();
+            if (name<0||name>3) {throw new InvalidLevelFormatException(line);}
+            
 
-            i=s1.nextInt();
-            if (i<0||i>720) {throw new InvalidLevelFormatException(line);}
-            positionOfObject.add(i);
+            int pos=s1.nextInt();
+            if (pos<0||pos>720) {throw new InvalidLevelFormatException(line);}
+            
 
-            i=s1.nextInt();
-            if (i<0||i>200) {throw new InvalidLevelFormatException(line);}
-            sizeOfObject.add(i);
+            int size=s1.nextInt();
+            if (size<0||size>200) {throw new InvalidLevelFormatException(line);}
+            
 
-            i=s1.nextInt();
-            if (i<-90||i>90) {throw new InvalidLevelFormatException(line);}
-            angleOfObject.add(i);
-            System.err.println(angleOfObject.size()+"th Objects loaded");
+            int angle=s1.nextInt();
+            if (angle<-90||angle>90) {throw new InvalidLevelFormatException(line);}
+
+            ObjectsToAdd.add(new toAddObjects(time, name, size, pos, angle));
+            
+
+            System.err.println(ObjectsToAdd.size()+"th Objects loaded");
             
         } catch (InputMismatchException e) {
             System.err.println("Invalid format: "+line+ "  does not follow standard format rules(TIME NAME Y-POSITION SIZE ANGLE). Skipped.");
@@ -129,15 +129,7 @@ public class GameComponent extends JComponent{
             System.err.println("Invalid format: "+line+ "  does not follow standard format rules(TIME NAME Y-POSITION SIZE ANGLE). Skipped.");
         }finally{
             
-            if (timeToAdd.size()>angleOfObject.size()) {
-                timeToAdd.remove(angleOfObject.size());
-            }
-            if (ObjectToAdd.size()>angleOfObject.size()) {
-                ObjectToAdd.remove(angleOfObject.size());
-            }
-            if (positionOfObject.size()>angleOfObject.size()) {
-                positionOfObject.remove(angleOfObject.size());
-            }
+
         }
         
 
@@ -220,28 +212,28 @@ public class GameComponent extends JComponent{
         
     }
     private void handleGenerateObjects() {
-        if (timeToAdd.isEmpty()) {
+        if (ObjectsToAdd.isEmpty()) {
             return;
         }
-        if (Math.abs(timeToAdd.get(0)-GameViewer.getTime())<10) {
-            timeToAdd.remove(0);
-            switch (ObjectToAdd.remove(0)) {
+        toAddObjects obj=ObjectsToAdd.get(0);
+        if (Math.abs(obj.timeToAdd-GameViewer.getTime())<10) {
+            switch (obj.ObjectToAdd) {
                 case Electrified_Barrier:
                     collideableObjects.add(
                         new Barrier(
                             GameViewer.WIDTH, 
-                            positionOfObject.remove(0), 
-                            sizeOfObject.remove(0), 
-                            angleOfObject.remove(0),
+                            obj.positionOfObject, 
+                            obj.sizeOfObject, 
+                            obj.angleOfObject,
                             true));
                     break;
                 case Non_Electric_Barrier:
                     collideableObjects.add(
                         new Barrier(
                             GameViewer.WIDTH, 
-                            positionOfObject.remove(0), 
-                            sizeOfObject.remove(0), 
-                            angleOfObject.remove(0),
+                            obj.positionOfObject, 
+                            obj.sizeOfObject, 
+                            obj.angleOfObject,
                             false));
                 
                     break;
@@ -249,16 +241,16 @@ public class GameComponent extends JComponent{
                     collideableObjects.add(
                         new coin(
                             GameViewer.WIDTH, 
-                            positionOfObject.remove(0), 
+                            obj.positionOfObject, 
                             0, 0));
-                    sizeOfObject.remove(0);
-                    angleOfObject.remove(0);
                     break;   
                 
             
                 default:
                     break;
             }
+            ObjectsToAdd.remove(0);
+            
         }
     }
 
@@ -276,10 +268,7 @@ public class GameComponent extends JComponent{
 
     public void restartGame() {
         collideableObjects.clear();
-        timeToAdd.clear();
-        sizeOfObject.clear();
-        positionOfObject.clear();
-        angleOfObject.clear();
+        ObjectsToAdd.clear();
         
     }
 
