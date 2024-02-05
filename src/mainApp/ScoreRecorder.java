@@ -25,8 +25,8 @@ public class ScoreRecorder {
     public void drawOn(Graphics2D g2){
         g2.drawString(  "score:"+score+"  "+
                         "level:"+level+"  "+
-                        "distance:"+distance+"  "+
-                        "speed: "+GameViewer.getGameSpeed()+"   "+
+                        "distance:"+(-GameViewer.getDistance())+"  "+
+                        "speed: "+(-GameViewer.getGameSpeed())+"   "+
                         "numberCoins:"+numberCoins+"  ", 
                         50, 20);
         

@@ -6,9 +6,9 @@ import java.awt.Graphics2D;
 public class Player extends CollideableObject{
 	private static final double MAX_SPEED = 6;
 	private static final double thrustIncrement = 10;
-	private int gravity=1;
+	private double gravity=1;
 	private boolean death=false;
-	private static int posY;
+	private static double posY;
     private boolean isFlying;
 
     public Player(int x2, int y2, double velX2, double velY2) {
@@ -65,7 +65,7 @@ public class Player extends CollideableObject{
     
     //do actions when any key on key board is pressed
 
-   public static int getPosY() {
+   public static double getPosY() {
 	   return posY;
    }
 

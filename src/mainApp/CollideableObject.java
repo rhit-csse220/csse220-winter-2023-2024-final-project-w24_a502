@@ -5,7 +5,7 @@ import java.awt.geom.Dimension2D;
 
 public abstract class CollideableObject {
 
-    public int x,y;
+    public double x,y;
     public double velX,velY,angle;
     public double moveSpeed;
     public boolean deathObject;

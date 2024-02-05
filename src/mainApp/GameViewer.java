@@ -149,9 +149,12 @@ public class GameViewer extends JPanel {
 	public static int getState() {
 		return state;
 	}
-	public static int getGameSpeed() {
+	public static double getGameSpeed() {
 	//	System.out.println("time   "+time+" speed "+GROWTH +"   "+(-(MAX_SPEED)*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))))+" power  "+1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))));
-		return -3+(int)(-(MAX_SPEED-3)/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))));
+		return -3+(-(MAX_SPEED-3)/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))));
+	}
+	public static double getDistance() {
+		return -3*time-(MAX_SPEED-3)*Math.log((1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))))+(MAX_SPEED-3)*Math.log((1+Math.pow(Math.E,(-(GROWTH)*(0-MIDPOINT)))));
 	}
 	public static int getFloor() {
 		return HEIGHT;
