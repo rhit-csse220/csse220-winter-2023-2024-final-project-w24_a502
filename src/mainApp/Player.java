@@ -2,6 +2,10 @@ package mainApp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
 
 public class Player extends CollideableObject{
 	private static final double MAX_SPEED = 6;
@@ -10,11 +14,29 @@ public class Player extends CollideableObject{
 	private boolean death=false;
 	private static int posY;
     private boolean isFlying;
+    private ImageIcon icon;
+    private int height,width;
 
     public Player(int x2, int y2, double velX2, double velY2) {
 		super(x2, y2, velX2, velY2);
         isFlying=false;
-	}
+        
+        icon=new ImageIcon("playerImage.png");
+        
+        
+        height=icon.getIconHeight();
+        
+        width=icon.getIconHeight();
+        
+        
+
+
+
+
+
+
+
+    }
     @Override
     public void update() {
         
@@ -47,12 +69,15 @@ public class Player extends CollideableObject{
 		
 		if(death) {
 			g2.setColor(Color.RED);
+            
+
 		}
 		else {
 			g2.setColor(Color.BLUE);
+            
 		}
 		g2.fillRect(0, 0, 80, 20);
-		
+		g2.drawImage(icon.getImage(),0,-height,width, height, null);
 		g2.translate( -x,-y);
 		
     }
