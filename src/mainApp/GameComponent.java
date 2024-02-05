@@ -120,7 +120,7 @@ public class GameComponent extends JComponent{
             ObjectsToAdd.add(new toAddObject(time, name, size, pos, angle));
             
 
-            System.err.println(ObjectsToAdd.size()+"th Objects loaded");
+            System.err.println(ObjectsToAdd.size()+"th Object loaded");
             
         } catch (InputMismatchException e) {
             System.err.println("Invalid format: "+line+ "  does not follow standard format rules(TIME NAME Y-POSITION SIZE ANGLE). Skipped.");
