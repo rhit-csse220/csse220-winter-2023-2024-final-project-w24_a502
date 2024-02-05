@@ -205,7 +205,7 @@ public class GameComponent extends JComponent{
         player.update();
         //System.out.println("hi");
         handleGenerateObjects();
-        if(GameViewer.getTime()>1000) {
+        if(GameViewer.getTime()>100) {
         handleGenerateObjectsRandomly();
         }
         
@@ -264,7 +264,9 @@ public class GameComponent extends JComponent{
 		if(GameViewer.random(20)==2) {
 			collideableObjects.add(new TrackingMissile(GameViewer.WIDTH));
 		}
-		
+		if(GameViewer.random(20)==2) {
+			collideableObjects.add(new Speed_Missle(GameViewer.WIDTH));
+		}
 		
 	}
 

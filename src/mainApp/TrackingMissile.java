@@ -6,12 +6,12 @@ import java.awt.Graphics2D;
 public class TrackingMissile extends missile {
 
 	public TrackingMissile(int x2) {
-		super(x2, Player.getPosY(), 0, 0);
+		super(x2-MISSLE_SIZE, Player.getPosY(), 0, 0);
 		// TODO Auto-generated constructor stub
 	}
-
-	private static final double MISSLE_SPEED_MODIFER = 0.9;
-	private int missleTimer=100;
+	private static final int MISSLE_SIZE = 30;
+	private static final double MISSLE_SPEED_MODIFER = 0.65;
+	private int missleTimer=500;
 
 	@Override
 	public void update() {

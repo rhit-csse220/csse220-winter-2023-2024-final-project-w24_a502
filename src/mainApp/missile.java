@@ -7,9 +7,9 @@ import java.awt.Graphics2D;
 public abstract class missile extends CollideableObject {
 
   
-	protected static final int MISSLE_SIZE = 30;
+	
 	public missile(int x2, double d, int velX2, int velY2) {
-		super(GameViewer.WIDTH-MISSLE_SIZE, d, 0, 0);
+		super(x2, d, 0, 0);
 		
 	}
 
