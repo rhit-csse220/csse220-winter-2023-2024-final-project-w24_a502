@@ -40,8 +40,8 @@ public class GameViewer extends JPanel {
 	
 
 	private static final int DELAY = 1000 /100; // time interval (ms)
-	private static final int MIDPOINT = 20000;
-	private static final double GROWTH = 1/10000;
+	private static final double MIDPOINT = 10000;
+	private static final double GROWTH = 1/10000.0;
 
 	private static GameComponent gameComponet;
 	
@@ -150,8 +150,8 @@ public class GameViewer extends JPanel {
 		return state;
 	}
 	public static int getGameSpeed() {
-		System.out.println((-MAX_SPEED*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))))));
-		return 5+(int)(-(MAX_SPEED-5)*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT))))));
+	//	System.out.println("time   "+time+" speed "+GROWTH +"   "+(-(MAX_SPEED)*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))))+" power  "+1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))));
+		return -3+(int)(-(MAX_SPEED-3)/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))));
 	}
 	public static int getFloor() {
 		return HEIGHT;
