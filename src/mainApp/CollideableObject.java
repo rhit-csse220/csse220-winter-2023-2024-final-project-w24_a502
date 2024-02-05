@@ -14,9 +14,9 @@ public abstract class CollideableObject {
 
     
 
-    public CollideableObject(int x2, int y2, double velX2, double velY2) {
+    public CollideableObject(int x2, double d, double velX2, double velY2) {
 		this.x=x2;
-		this.y=y2;
+		this.y=d;
 		this.velX=velX2;
 		this.velY=velY2;
 	}
@@ -27,9 +27,11 @@ public abstract class CollideableObject {
     	this.y+=velY;
     	if(y<=GameViewer.getCeiling()) {
     		y=GameViewer.getCeiling();
+    		velY=0;
     	}
     	if(y>=GameViewer.getFloor()) {
     		y=GameViewer.getFloor();
+    		velY=0;
     	}
     }
 

@@ -261,6 +261,9 @@ public class GameComponent extends JComponent{
 		if(GameViewer.random(20)==2) {
 			collideableObjects.add(new coin(GameViewer.WIDTH+600,GameViewer.random(GameViewer.HEIGHT), 0, 0));
 		}
+		if(GameViewer.random(20)==2) {
+			collideableObjects.add(new TrackingMissile(GameViewer.WIDTH));
+		}
 		
 		
 	}

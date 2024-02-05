@@ -12,7 +12,7 @@ public class Player extends CollideableObject{
 	private static final double thrustIncrement = 10;
 	private double gravity=1;
 	private boolean death=false;
-	private static double posY;
+	private static double posY,posX;
     private boolean isFlying;
     private ImageIcon icon;
     private int height,width;
@@ -61,6 +61,7 @@ public class Player extends CollideableObject{
             velY=0;
     	}
     	posY=y;
+    	posX=x;
         
     }
 	@Override
@@ -96,5 +97,10 @@ public class Player extends CollideableObject{
 
    public void changeIsFlying(boolean b){
         isFlying=b;
+   }
+   
+   public static double getPosX() {
+	   // TODO Auto-generated method stub
+	   return posX;
    }
 }
