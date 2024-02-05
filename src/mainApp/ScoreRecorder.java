@@ -26,6 +26,7 @@ public class ScoreRecorder {
         g2.drawString(  "score:"+score+"  "+
                         "level:"+level+"  "+
                         "distance:"+distance+"  "+
+                        "speed: "+GameViewer.getGameSpeed()+"   "+
                         "numberCoins:"+numberCoins+"  ", 
                         50, 20);
         
