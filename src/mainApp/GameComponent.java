@@ -23,9 +23,8 @@ public class GameComponent extends JComponent{
     private ScoreRecorder scoreRecorder;
     private Background background;
     private Player player;
-    GameViewer game;
 
-    private ArrayList<toAddObjects> ObjectsToAdd=new ArrayList<toAddObjects>();
+    private ArrayList<toAddObject> ObjectsToAdd=new ArrayList<toAddObject>();
     
 
     private static final int Electrified_Barrier = 0;
@@ -118,7 +117,7 @@ public class GameComponent extends JComponent{
             int angle=s1.nextInt();
             if (angle<-90||angle>90) {throw new InvalidLevelFormatException(line);}
 
-            ObjectsToAdd.add(new toAddObjects(time, name, size, pos, angle));
+            ObjectsToAdd.add(new toAddObject(time, name, size, pos, angle));
             
 
             System.err.println(ObjectsToAdd.size()+"th Objects loaded");
@@ -215,7 +214,7 @@ public class GameComponent extends JComponent{
         if (ObjectsToAdd.isEmpty()) {
             return;
         }
-        toAddObjects obj=ObjectsToAdd.get(0);
+        toAddObject obj=ObjectsToAdd.get(0);
         if (Math.abs(obj.timeToAdd-GameViewer.getTime())<10) {
             switch (obj.ObjectToAdd) {
                 case Electrified_Barrier:

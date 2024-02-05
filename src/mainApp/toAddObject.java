@@ -1,8 +1,8 @@
 package mainApp;
 
-public class toAddObjects {
+public class toAddObject {
     public int timeToAdd,ObjectToAdd,sizeOfObject,positionOfObject,angleOfObject;
-    public toAddObjects(int timeToAdd,int ObjectToAdd,int sizeOfObject,int positionOfObject,int angleOfObject){
+    public toAddObject(int timeToAdd,int ObjectToAdd,int sizeOfObject,int positionOfObject,int angleOfObject){
         this.timeToAdd=timeToAdd;
         this.ObjectToAdd=ObjectToAdd;
         this.sizeOfObject=sizeOfObject;
