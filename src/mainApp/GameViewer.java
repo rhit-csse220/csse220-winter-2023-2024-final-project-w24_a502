@@ -28,7 +28,7 @@ public class GameViewer extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private static int ceiling =0;
 	private static int time=1;
-	private static final int MAX_SPEED=10;
+	private static final int MAX_SPEED=30;
 	public static final int WIDTH = 1280; // 
 	public static final int HEIGHT = 720; // 
 
@@ -41,7 +41,7 @@ public class GameViewer extends JPanel {
 
 	private static final int DELAY = 1000 /100; // time interval (ms)
 	private static final int MIDPOINT = 7000;
-	private static final double GROWTH = 1/100;
+	private static final double GROWTH = 1;
 
 	private static GameComponent gameComponet;
 	

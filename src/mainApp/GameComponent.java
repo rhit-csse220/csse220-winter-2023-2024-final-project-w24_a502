@@ -205,9 +205,9 @@ public class GameComponent extends JComponent{
         player.update();
         //System.out.println("hi");
         handleGenerateObjects();
-
-        //handleGenerateObjectsRandomly();
-        
+        if(GameViewer.getTime()>1000) {
+        handleGenerateObjectsRandomly();
+        }
         
     }
     private void handleGenerateObjects() {
