@@ -36,6 +36,7 @@ public class GameComponent extends JComponent{
 	private static final int RUNNING = 1;
 	private static final int PAUSE = 2;
 	private static final int GAME_OVER = 3;
+	private static final int RANDOM_OBJECT_DELAY_START = 1500;
 
 
     public GameComponent(){
@@ -205,7 +206,7 @@ public class GameComponent extends JComponent{
         player.update();
         //System.out.println("hi");
         handleGenerateObjects();
-        if(GameViewer.getTime()>100) {
+        if(GameViewer.getTime()>RANDOM_OBJECT_DELAY_START) {
         handleGenerateObjectsRandomly();
         }
         
