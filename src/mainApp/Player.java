@@ -52,7 +52,7 @@ public class Player extends CollideableObject{
         
     	
         this.y+=velY;
-        if(y<GameViewer.getCeiling()) {
+        if(y<GameViewer.getCeiling()+height) {
     		y=GameViewer.getCeiling();
             velY=0;
     	}
