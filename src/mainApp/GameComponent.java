@@ -271,6 +271,17 @@ public class GameComponent extends JComponent{
 		}
 		
 	}
+    public void handleDeleteOffScreenObjects() {
+    	ArrayList<CollideableObject> objectsToRemove = new ArrayList<CollideableObject>();
+    	for(CollideableObject o:collideableObjects) {
+    		if(o.isOffScreen()) {
+    			objectsToRemove.add(o);
+    		}
+    	}
+    	for(CollideableObject o:objectsToRemove) {
+    		collideableObjects.remove(o);
+    	}
+    }//Removes off screen objects from updating order
 
     public void restartGame() {
         collideableObjects.clear();

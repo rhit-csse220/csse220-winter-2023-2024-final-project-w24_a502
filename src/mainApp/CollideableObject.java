@@ -34,5 +34,9 @@ public abstract class CollideableObject {
     		velY=0;
     	}
     }
+    public boolean isOffScreen() {
+    	return(x<-600) ;//returns true if object is 600 pixels off the screen to the left
+    	
+    }
 
 }
