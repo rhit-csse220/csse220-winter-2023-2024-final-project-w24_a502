@@ -30,7 +30,8 @@ public class GameComponent extends JComponent{
     private static final int Electrified_Barrier = 0;
 	private static final int Non_Electric_Barrier = 1;
 	private static final int Coin = 2;
-	private static final int Missile = 3;
+	private static final int Tracking_Missile = 3;
+	private static final int Speed_Missile = 4;
 
     private static final int START = 0;
 	private static final int RUNNING = 1;
