@@ -7,7 +7,7 @@ public abstract class CollideableObject {
 
     public double x,y;
     public double velX,velY,angle;
-    public double moveSpeed;
+    
     public boolean deathObject;
 
 
