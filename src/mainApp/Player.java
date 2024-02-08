@@ -50,16 +50,17 @@ public class Player extends CollideableObject{
         }
         
         
-    	
-        this.y+=velY;
+    	this.y+=velY;
+        
         if(y<GameViewer.getCeiling()+height) {
-    		y=GameViewer.getCeiling();
+    		y=GameViewer.getCeiling()+height;
             velY=0;
     	}
     	if(y>GameViewer.getFloor()-60) {
     		y=GameViewer.getFloor()-60;
             velY=0;
     	}
+        
     	posY=y;
     	posX=x;
         
