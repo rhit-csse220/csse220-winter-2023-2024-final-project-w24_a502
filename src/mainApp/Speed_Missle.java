@@ -2,13 +2,16 @@ package mainApp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 
 public class Speed_Missle extends missile {
 	public Speed_Missle(int x2) {
 		super(x2-MISSLE_SIZE, Player.getPosY(), 0, 0);
 		// TODO Auto-generated constructor stub
 	}
-
+	public ObjectType getType() {
+		return ObjectType.MISSLE;
+	}
 	private static final int MISSLE_SIZE = 15;
 	private static final double MISSLE_SPEED_MULTIPLIER = 2.5;
 	private int missleTimer=50;
@@ -72,6 +75,11 @@ public class Speed_Missle extends missile {
 	public void overlap() {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	boolean isOverLapping(Shape object) {
+		// TODO Auto-generated method stub
+		return object.contains((int)(x-MISSLE_SIZE),(int)(y-MISSLE_SIZE), 2*MISSLE_SIZE, 2*MISSLE_SIZE);
 	}
 
 }

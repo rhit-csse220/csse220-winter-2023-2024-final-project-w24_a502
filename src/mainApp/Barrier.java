@@ -2,6 +2,7 @@ package mainApp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
 
@@ -30,7 +31,7 @@ public class Barrier  extends CollideableObject {
 		g2.translate(x,y);
 		
 		g2.rotate((theta*Math.PI)/180);
-		Rectangle2D rect = new Rectangle2D.Double(5, 5, length, 60);
+		Rectangle2D rect = new Rectangle2D.Double(-length/2, -30, length, 60);
 		if(electrified) {
 			g2.setColor(Color.yellow);
 		}
@@ -53,5 +54,18 @@ public class Barrier  extends CollideableObject {
      public void update() {
          super.update();
      }
+
+	@Override
+	boolean isOverLapping(Shape object) {
+		// TODO Auto-generated method stub
+		Rectangle2D rect = new Rectangle2D.Double(-length/2, -30, length, 60);
+		return object.contains(rect);
+	}
+
+	@Override
+	public ObjectType getType() {
+		// TODO Auto-generated method stub
+		return ObjectType.BARRIER;
+	}
     
 }

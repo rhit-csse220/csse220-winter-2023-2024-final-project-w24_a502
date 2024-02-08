@@ -2,6 +2,7 @@ package mainApp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 
 public class TrackingMissile extends missile {
 
@@ -65,8 +66,19 @@ public class TrackingMissile extends missile {
 
 	@Override
 	public void overlap() {
-		// TODO Auto-generated method stub
+		return;
+	}
 
+	@Override
+	boolean isOverLapping(Shape object) {
+		// TODO Auto-generated method stub
+		return object.contains((int)(x-MISSLE_SIZE),(int)(y-MISSLE_SIZE), 2*MISSLE_SIZE, 2*MISSLE_SIZE);
+	}
+
+	@Override
+	public ObjectType getType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

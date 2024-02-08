@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -38,7 +39,6 @@ public class GameComponent extends JComponent{
 	private static final int PAUSE = 2;
 	private static final int GAME_OVER = 3;
 	private static final int RANDOM_OBJECT_DELAY_START = 1500;
-
 
     public GameComponent(){
         //create objects here
@@ -174,7 +174,7 @@ public class GameComponent extends JComponent{
         }
         
 	}
-
+    
 
 
     private void drawGameOver(Graphics2D g2) {
@@ -282,6 +282,29 @@ public class GameComponent extends JComponent{
     		collideableObjects.remove(o);
     	}
     }//Removes off screen objects from updating order
+    public CollideableObject findObjectPlayerContact() {
+    	Shape p = player.shape();
+    	for(CollideableObject o:collideableObjects) {
+    		if(o.isOverLapping(p)) {
+    			return o;
+    		}
+    	}
+    	return null;
+    }
+    public void handleObjectPlayerContact() {
+    	CollideableObject contact =this.findObjectPlayerContact();
+    	if(contact==null) {
+    		return;
+    	}
+    	if(contact.isDeath()) {
+    		//todo result after death
+    		// loses a life only game over if no lives left
+    		System.out.println("DEAD!!!!!!!!!!!!!");//temp
+    		return;
+    	}//checks for objects that kill the player
+    	
+    	
+    }
 
     public void restartGame() {
         collideableObjects.clear();

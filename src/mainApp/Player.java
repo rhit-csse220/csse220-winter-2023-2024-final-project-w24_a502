@@ -3,7 +3,9 @@ package mainApp;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Shape;
 import java.awt.Toolkit;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 
@@ -16,7 +18,7 @@ public class Player extends CollideableObject{
     private boolean isFlying;
     private ImageIcon icon;
     private int height,width;
-
+    
     public Player(int x2, int y2, double velX2, double velY2) {
 		super(x2, y2, velX2, velY2);
         isFlying=false;
@@ -104,4 +106,17 @@ public class Player extends CollideableObject{
 	   // TODO Auto-generated method stub
 	   return posX;
    }
+   @Override
+   boolean isOverLapping(Shape object) {
+	// TODO Auto-generated method stub
+	return false;
+   }//not used.
+	public Shape shape() {
+		return new Rectangle2D.Double(x, y-height, 80+width, 20+height);
+	}
+	@Override
+	public ObjectType getType() {
+		// TODO Auto-generated method stub
+		return ObjectType.PLAYER;
+	}
 }
