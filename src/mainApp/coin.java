@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 
@@ -12,19 +13,23 @@ public class coin extends CollideableObject {
     private int height,width;
 	
 
-	private final static int COIN_RADIUS=30;
+	//private final static int COIN_RADIUS=30;
 	public coin(int x, int y,int velX,int velY) {
+		
 		super(x,y,0,0);
-		if(this.y+COIN_RADIUS>GameViewer.getFloor()) {
-			this.y=GameViewer.getFloor()-COIN_RADIUS;
-		}
-		if(this.y-COIN_RADIUS<GameViewer.getCeiling()) {
-			this.y=GameViewer.getCeiling()+COIN_RADIUS;
-		}//forces the coin to be between the ceiling and the floor.
 
 		icon=new ImageIcon("coin.png");
         height=icon.getIconHeight();
         width=icon.getIconHeight();
+
+		if(this.y+height>GameViewer.getFloor()) {
+			this.y=GameViewer.getFloor()-height;
+		}
+		if(this.y-height<GameViewer.getCeiling()) {
+			this.y=GameViewer.getCeiling()+height;
+		}//forces the coin to be between the ceiling and the floor.
+
+		
 	}
     @Override
     public void drawOn(Graphics2D g2) {
@@ -42,12 +47,13 @@ public class coin extends CollideableObject {
     }
 	@Override
 	boolean isOverLapping(Shape object) {
-		   return object.contains(x, y, COIN_RADIUS, COIN_RADIUS);
+		Rectangle2D rect = new Rectangle2D.Double(x, y, width, height);
+		   return object.intersects(rect);
     	}
 	@Override
 	public ObjectType getType() {
 		// TODO Auto-generated method stub
-		return null;
+		return ObjectType.COIN;
 	}
     
 }

@@ -217,6 +217,8 @@ public class GameComponent extends JComponent{
         if(GameViewer.getTime()>RANDOM_OBJECT_DELAY_START) {
         handleGenerateObjectsRandomly();
         }
+        handleDeleteOffScreenObjects();
+        handleObjectPlayerContact();
         return false;
         
         
@@ -295,7 +297,9 @@ public class GameComponent extends JComponent{
     	Shape p = player.shape();
     	for(CollideableObject o:collideableObjects) {
     		if(o.isOverLapping(p)) {
+                System.out.println("overlap!");
     			return o;
+               
     		}
     	}
     	return null;
@@ -305,12 +309,29 @@ public class GameComponent extends JComponent{
     	if(contact==null) {
     		return;
     	}
-    	if(contact.isDeath()) {
-    		//todo result after death
-    		// loses a life only game over if no lives left
-    		System.out.println("DEAD!!!!!!!!!!!!!");//temp
-    		return;
-    	}//checks for objects that kill the player
+        if (contact.getType()==ObjectType.COIN) {
+            collideableObjects.remove(contact);
+            scoreRecorder.addCoin();
+        }
+        if (contact.getType()==ObjectType.BARRIER) {
+            Barrier barrier=(Barrier)contact;
+            if (barrier.isDeath()) {
+                player.changeLife(-1);
+            }else{
+                player.stuck();
+            }
+            
+            
+        }
+
+
+
+    	// if(contact.isDeath()) {
+    	// 	//todo result after death
+    	// 	// loses a life only game over if no lives left
+    	// 	System.out.println("DEAD!!!!!!!!!!!!!");//temp
+    	// 	return;
+    	// }//checks for objects that kill the player
     	
     	
     }
@@ -321,7 +342,7 @@ public class GameComponent extends JComponent{
         ObjectsToAdd.clear();
         player=new Player(500, 300, 30, 40);
        
-        this.scoreRecorder=new ScoreRecorder();
+        this.scoreRecorder.reset();
         this.background=new Background();
         
 

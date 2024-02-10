@@ -34,6 +34,11 @@ public class ScoreRecorder {
                         50, 20);
         
     }
+    public void reset(){
+        score=0;
+        distance=0;
+        numberCoins=0;
+    }
 
     
 
@@ -62,6 +67,10 @@ public class ScoreRecorder {
     public void update() {
         distance=(int) -GameViewer.getDistance();
         score=(int) (distance*10*-GameViewer.getGameSpeed()+numberCoins*1000);
+    }
+
+    public void addCoin() {
+        numberCoins++;
     }
 
 

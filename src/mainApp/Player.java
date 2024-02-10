@@ -19,6 +19,7 @@ public class Player extends CollideableObject{
     private boolean isFlying;
     private ImageIcon icon;
     private int height,width;
+    private int Invincible;
     
     public Player(int x2, int y2, double velX2, double velY2) {
 		super(x2, y2, velX2, velY2);
@@ -32,6 +33,9 @@ public class Player extends CollideableObject{
         width=icon.getIconHeight();
         
         life=3;
+
+        Invincible=100;
+        velX=0;   
 
     }
     @Override
@@ -48,18 +52,32 @@ public class Player extends CollideableObject{
         }else{
             velY+=gravity*0.5;
         }
+        if (Invincible>0) {
+            Invincible--;
+        }
         
         
     	this.y+=velY;
+        this.x+=velX;
         
         if(y<GameViewer.getCeiling()+height) {
     		y=GameViewer.getCeiling()+height;
             velY=0;
     	}
-    	if(y>GameViewer.getFloor()-40) {
-    		y=GameViewer.getFloor()-40;
+    	if(y>GameViewer.getFloor()-100) {
+    		y=GameViewer.getFloor()-100;
             velY=0;
     	}
+
+        if (x<0) {
+            velX=0;
+            changeLife(-1);
+        }
+        if (x!=500) {
+            velX=-(x-500)/10;
+        }
+
+        
         
     	posY=y;
     	posX=x;
@@ -73,8 +91,11 @@ public class Player extends CollideableObject{
 			//g2.setColor(Color.RED);
 		}
 		else {
-			g2.drawImage(icon.getImage(),0,-height,width, height, null);
-            
+            if (Invincible%20>10) {
+                
+            }else{
+			    g2.drawImage(icon.getImage(),0,0,width, height, null);
+            }
 		}
 		
 		g2.translate( -x,-y);
@@ -105,11 +126,26 @@ public class Player extends CollideableObject{
 	return false;
    }//not used.
 	public Shape shape() {
-		return new Rectangle2D.Double(x, y-height, 80+width, 20+height);
+		return new Rectangle2D.Double(x, y, width, height);
 	}
 	@Override
 	public ObjectType getType() {
-		// TODO Auto-generated method stub
 		return ObjectType.PLAYER;
 	}
+    public void changeLife(int i) {
+        if (Invincible>0) {
+            return;
+        }else{
+            life+=i;
+            Invincible=100;
+        }
+    }
+    public void stuck() {
+        if (Invincible>0) {
+            
+        }else{
+            velX=GameViewer.getGameSpeed();
+        }
+        
+    }
 }

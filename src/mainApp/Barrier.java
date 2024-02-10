@@ -2,6 +2,7 @@ package mainApp;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
@@ -27,10 +28,19 @@ public class Barrier  extends CollideableObject {
 			this.y=(int) (GameViewer.getFloor()-this.length*Math.cos((this.theta*Math.PI)/180.0));
 		}//forces the barrier to be with bounds of ceiling and floor
 
+		if (electrified) {
+			deathObject=true;
+		}else{
+			deathObject=false;
+		}
 		icon=new ImageIcon("electric barrier.png");
         height=icon.getIconHeight();
         width=icon.getIconHeight();
+
+		int[] Xs={0,};
+		int[] Ys={0,};
 		
+		Polygon polygon=new Polygon(Xs, Ys, 4);
 	}
 
 	@Override
@@ -64,15 +74,15 @@ public class Barrier  extends CollideableObject {
 
 	@Override
 	boolean isOverLapping(Shape object) {
-		// TODO Auto-generated method stub
-		Rectangle2D rect = new Rectangle2D.Double(-length/2, -30, length, 60);
-		return object.contains(rect);
+		Rectangle2D rect = new Rectangle2D.Double(x, y, width, height);
+		
+		return object.intersects(rect);
 	}
 
 	@Override
 	public ObjectType getType() {
-		// TODO Auto-generated method stub
 		return ObjectType.BARRIER;
 	}
+
     
 }
