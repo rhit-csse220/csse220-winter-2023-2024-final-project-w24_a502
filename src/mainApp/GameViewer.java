@@ -55,7 +55,9 @@ public class GameViewer extends JPanel {
 			
 				//handleCheckGameOver();
 				time++;
-				gameComponet.update();
+				if(gameComponet.update()){
+					state=GAME_OVER;
+				}
 				gameComponet.repaint();
 				
 			}

@@ -5,12 +5,16 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
+import javax.swing.ImageIcon;
+
 
 public class Barrier  extends CollideableObject {
 
     private int theta;
     private int length;
     private boolean electrified;
+	private ImageIcon icon;
+    private int height,width;
     public Barrier(int x2, int y2, int size, int theta, boolean electrified) {
 		super(x2, y2, 0, 0);
 		length=size;
@@ -22,6 +26,10 @@ public class Barrier  extends CollideableObject {
 		if(this.y+this.length*Math.cos((this.theta*Math.PI)/180.0)>GameViewer.getFloor()) {
 			this.y=(int) (GameViewer.getFloor()-this.length*Math.cos((this.theta*Math.PI)/180.0));
 		}//forces the barrier to be with bounds of ceiling and floor
+
+		icon=new ImageIcon("electric barrier.png");
+        height=icon.getIconHeight();
+        width=icon.getIconHeight();
 		
 	}
 
@@ -33,22 +41,21 @@ public class Barrier  extends CollideableObject {
 		g2.rotate((theta*Math.PI)/180);
 		Rectangle2D rect = new Rectangle2D.Double(-length/2, -30, length, 60);
 		if(electrified) {
-			g2.setColor(Color.yellow);
+			//g2.setColor(Color.yellow);
+			g2.drawImage(icon.getImage(),0,-height,width, height, null);
 		}
 		else {
 			g2.setColor(Color.RED);
+			g2.fill(rect);
 		}
 		
-		g2.fill(rect);
+		
 		g2.rotate((-theta*Math.PI)/180);
+		g2.setColor(Color.black);
 		g2.translate( -x,-y);
 		}
 
-    @Override
-    public void overlap() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'overlap'");
-    }
+
 
      @Override
      public void update() {

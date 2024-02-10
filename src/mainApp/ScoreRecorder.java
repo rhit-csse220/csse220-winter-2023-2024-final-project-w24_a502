@@ -1,5 +1,6 @@
 package mainApp;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.logging.Level;
@@ -23,10 +24,12 @@ public class ScoreRecorder {
     }
 
     public void drawOn(Graphics2D g2){
+        g2.setColor(Color.BLACK);
         g2.drawString(  "score:"+score+"  "+
                         "level:"+level+"  "+
-                        "distance:"+(int)(-GameViewer.getDistance())+"  "+
+                        "distance:"+(int)(distance)+"  "+
                         "speed: "+(int)(-GameViewer.getGameSpeed())+"   "+
+                        "life: "+Player.getLife()+"  "+
                         "numberCoins:"+numberCoins+"  ", 
                         50, 20);
         
@@ -54,6 +57,11 @@ public class ScoreRecorder {
 
     public static int getLevel() {
         return level;
+    }
+
+    public void update() {
+        distance=(int) -GameViewer.getDistance();
+        score=(int) (distance*10*-GameViewer.getGameSpeed()+numberCoins*1000);
     }
 
 

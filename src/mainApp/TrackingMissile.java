@@ -64,10 +64,6 @@ public class TrackingMissile extends missile {
      
   }
 
-	@Override
-	public void overlap() {
-		return;
-	}
 
 	@Override
 	boolean isOverLapping(Shape object) {

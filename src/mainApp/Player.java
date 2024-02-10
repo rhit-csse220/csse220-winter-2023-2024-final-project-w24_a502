@@ -13,6 +13,7 @@ public class Player extends CollideableObject{
 	private static final double MAX_SPEED = 6;
 	private static final double thrustIncrement = 10;
 	private double gravity=1;
+    private static int life;
 	private boolean death=false;
 	private static double posY,posX;
     private boolean isFlying;
@@ -30,17 +31,14 @@ public class Player extends CollideableObject{
         
         width=icon.getIconHeight();
         
-        
-
-
-
-
-
-
+        life=3;
 
     }
     @Override
     public void update() {
+        if (life<1) {
+            death=true;
+        }
         
         if (isFlying) {
             velY-=0.5;
@@ -58,8 +56,8 @@ public class Player extends CollideableObject{
     		y=GameViewer.getCeiling()+height;
             velY=0;
     	}
-    	if(y>GameViewer.getFloor()-60) {
-    		y=GameViewer.getFloor()-60;
+    	if(y>GameViewer.getFloor()-40) {
+    		y=GameViewer.getFloor()-40;
             velY=0;
     	}
         
@@ -72,40 +70,35 @@ public class Player extends CollideableObject{
 		g2.translate(x,y);
 		
 		if(death) {
-			g2.setColor(Color.RED);
-            
-
+			//g2.setColor(Color.RED);
 		}
 		else {
-			g2.setColor(Color.BLUE);
+			g2.drawImage(icon.getImage(),0,-height,width, height, null);
             
 		}
-		g2.fillRect(0, 0, 80, 20);
-		g2.drawImage(icon.getImage(),0,-height,width, height, null);
+		
 		g2.translate( -x,-y);
 		
     }
 
-    @Override
-    public void overlap() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'overlap'");
-    }
+
     
     //do actions when any key on key board is pressed
 
-   public static double getPosY() {
-	   return posY;
-   }
+    public static double getPosY() {
+        return posY;
+    }
 
-   public void changeIsFlying(boolean b){
-        isFlying=b;
-   }
-   
-   public static double getPosX() {
-	   // TODO Auto-generated method stub
-	   return posX;
-   }
+    public void changeIsFlying(boolean b){
+            isFlying=b;
+    }
+    
+    public static double getPosX() {
+        return posX;
+    }
+    public static int getLife(){
+            return life;
+    }
    @Override
    boolean isOverLapping(Shape object) {
 	// TODO Auto-generated method stub

@@ -20,7 +20,6 @@ public abstract class CollideableObject {
 		this.velY=velY2;
 	}
 	public abstract void drawOn(Graphics2D g2);
-    public abstract void overlap();
     public void update() {
     	this.x+=GameViewer.getGameSpeed()+velX;
     	this.y+=velY;

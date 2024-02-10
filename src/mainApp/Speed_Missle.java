@@ -71,11 +71,7 @@ public class Speed_Missle extends missile {
 	  }
 	
 
-	@Override
-	public void overlap() {
-		// TODO Auto-generated method stub
 
-	}
 	@Override
 	boolean isOverLapping(Shape object) {
 		// TODO Auto-generated method stub

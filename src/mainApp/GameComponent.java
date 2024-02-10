@@ -200,16 +200,25 @@ public class GameComponent extends JComponent{
         g2.drawString("Press any key to start", 50, 50);
     }
 
-    public void update(){
+    public boolean update(){
+
         for (CollideableObject collideableObject : collideableObjects) {
+            
             collideableObject.update();
         }
         player.update();
+        scoreRecorder.update();
+        
+        if (player.isDeath()) {
+            return true;
+        }
         //System.out.println("hi");
         handleGenerateObjects();
         if(GameViewer.getTime()>RANDOM_OBJECT_DELAY_START) {
         handleGenerateObjectsRandomly();
         }
+        return false;
+        
         
     }
     private void handleGenerateObjects() {
@@ -306,9 +315,16 @@ public class GameComponent extends JComponent{
     	
     }
 
+
     public void restartGame() {
         collideableObjects.clear();
         ObjectsToAdd.clear();
+        player=new Player(500, 300, 30, 40);
+       
+        this.scoreRecorder=new ScoreRecorder();
+        this.background=new Background();
+        
+
         
     }
 
