@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -49,10 +50,10 @@ public class Barrier  extends CollideableObject {
 		g2.translate(x,y);
 		
 		g2.rotate((theta*Math.PI)/180);
-		Rectangle2D rect = new Rectangle2D.Double(-length/2, -30, length, 60);
+		Rectangle2D rect = new Rectangle2D.Double(-length/2.0, -30, length, 60);
 		if(electrified) {
 			//g2.setColor(Color.yellow);
-			g2.drawImage(icon.getImage(),0,-height,width, height, null);
+			g2.drawImage(icon.getImage(),(int)(0-width/2.0),(int)(-height/2.0),width, height, null);
 		}
 		else {
 			g2.setColor(Color.RED);
@@ -63,7 +64,28 @@ public class Barrier  extends CollideableObject {
 		g2.rotate((-theta*Math.PI)/180);
 		g2.setColor(Color.black);
 		g2.translate( -x,-y);
+//shows where detection occurs
+		{
+			ArrayList<Double> xpts=new ArrayList<>();
+			ArrayList<Double> ypts=new ArrayList<>();
+			for(int i =0; i<8;i++) {
+				xpts.add(-length/2.0+i*2*length/7.0);
+			}// takes 8 points along the x axis for detection
+			for(int i =0; i<4;i++) {
+				ypts.add(-30+i*60.0/3.0);
+			}// takes 4 points along the y axis for detection
+			for(int i =0;i<32;i++) {
+				double xPt = xpts.get(i/8);
+				double yPt = ypts.get(i%4);
+				//matrix rotation
+				double alterX= xPt*Math.cos(theta*Math.PI/180.0)-yPt*Math.sin(theta*Math.PI/180.0);
+				double alterY= xPt*Math.sin(theta*Math.PI/180.0)+yPt*Math.cos(theta*Math.PI/180.0);
+				//detection
+				g2.drawOval((int)(x+alterX),(int) (y+alterY), 5, 5);
+			}
 		}
+// shows points of detection
+	}
 
 
 
@@ -74,9 +96,27 @@ public class Barrier  extends CollideableObject {
 
 	@Override
 	boolean isOverLapping(Shape object) {
-		Rectangle2D rect = new Rectangle2D.Double(x, y, width, height);
-		
-		return object.intersects(rect);
+		ArrayList<Double> xpts=new ArrayList<>();
+		ArrayList<Double> ypts=new ArrayList<>();
+		double xPt,yPt,alterX,alterY;
+		for(int i =0; i<8;i++) {
+			xpts.add(-length/2.0+i*2*length/7.0);
+		}// takes 8 points along the x axis for detection
+		for(int i =0; i<4;i++) {
+			ypts.add(-30+i*60.0/3.0);
+		}// takes 4 points along the x axis for detection		
+		for(int i =0;i<32;i++) {
+			xPt = xpts.get(i/8);
+			yPt = ypts.get(i%4);
+			
+			//matrix rotation
+			alterX= xPt*Math.cos(theta*Math.PI/180.0)-yPt*Math.sin(theta*Math.PI/180.0);
+			alterY= xPt*Math.sin(theta*Math.PI/180.0)+yPt*Math.cos(theta*Math.PI/180.0);
+			//detection
+			if(object.contains(x+alterX, y+alterY))
+				return true;
+		}
+		return false;
 	}
 
 	@Override
