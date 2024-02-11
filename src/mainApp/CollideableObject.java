@@ -25,7 +25,7 @@ public abstract class CollideableObject {
     	this.y+=velY;
     	if(y<=GameViewer.getCeiling()) {
     		y=GameViewer.getCeiling();
-    		velY=0;
+    		velY=0; 
     	}
     	if(y>=GameViewer.getFloor()) {
     		y=GameViewer.getFloor();

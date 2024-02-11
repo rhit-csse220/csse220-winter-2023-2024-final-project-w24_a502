@@ -34,7 +34,7 @@ public class Player extends CollideableObject{
         
         life=3;
 
-        Invincible=100;
+        Invincible=70;
         velX=0;   
 
     }
@@ -140,14 +140,19 @@ public class Player extends CollideableObject{
             return;
         }else{
             life+=i;
-            Invincible=100;
+            Invincible=70;
         }
     }
-    public void stuck() {
+    public void stuck(Barrier barrier) {
         if (Invincible>0) {
             
         }else{
-            velX=GameViewer.getGameSpeed();
+            if ((barrier.x)>this.x) {
+                velX=-GameViewer.getGameSpeed();
+            }else{
+                velY=0;
+            }
+            
         }
         
     }

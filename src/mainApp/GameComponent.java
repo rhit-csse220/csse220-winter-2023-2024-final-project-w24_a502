@@ -113,7 +113,7 @@ public class GameComponent extends JComponent{
             
 
             int size=s1.nextInt();
-            if (size<0||size>200) {throw new InvalidLevelFormatException(line);}
+            if (size<0||size>1000) {throw new InvalidLevelFormatException(line);}
             
 
             int angle=s1.nextInt();
@@ -318,7 +318,7 @@ public class GameComponent extends JComponent{
             if (barrier.isDeath()) {
                 player.changeLife(-1);
             }else{
-                player.stuck();
+                player.stuck(barrier);
             }
             
             

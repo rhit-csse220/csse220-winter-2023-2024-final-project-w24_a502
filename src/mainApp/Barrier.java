@@ -16,18 +16,18 @@ public class Barrier  extends CollideableObject {
     private int length;
     private boolean electrified;
 	private ImageIcon icon;
-    private int height,width;
+    public int height,width;
     public Barrier(int x2, int y2, int size, int theta, boolean electrified) {
 		super(x2, y2, 0, 0);
 		length=size;
 		this.theta=theta;
 		this.electrified=electrified;
-		if(this.y-this.length*Math.cos((this.theta*Math.PI)/180.0)<GameViewer.getCeiling()) {
-			this.y=(int) (GameViewer.getCeiling()+this.length*Math.cos((this.theta*Math.PI)/180.0));
-		}
-		if(this.y+this.length*Math.cos((this.theta*Math.PI)/180.0)>GameViewer.getFloor()) {
-			this.y=(int) (GameViewer.getFloor()-this.length*Math.cos((this.theta*Math.PI)/180.0));
-		}//forces the barrier to be with bounds of ceiling and floor
+		// if(this.y-this.length*Math.cos((this.theta*Math.PI)/180.0)<GameViewer.getCeiling()) {
+		// 	this.y=(int) (GameViewer.getCeiling()+this.length*Math.cos((this.theta*Math.PI)/180.0));
+		// }
+		// if(this.y+this.length*Math.cos((this.theta*Math.PI)/180.0)>GameViewer.getFloor()) {
+		// 	this.y=(int) (GameViewer.getFloor()-this.length*Math.cos((this.theta*Math.PI)/180.0));
+		// }//forces the barrier to be with bounds of ceiling and floor
 
 		if (electrified) {
 			deathObject=true;
@@ -36,7 +36,7 @@ public class Barrier  extends CollideableObject {
 		}
 		icon=new ImageIcon("electric barrier.png");
         height=icon.getIconHeight();
-        width=icon.getIconWidth();
+        width=length;
 
 		// int[] Xs={0,};
 		// int[] Ys={0,};
@@ -50,7 +50,7 @@ public class Barrier  extends CollideableObject {
 		g2.translate(x,y);
 		
 		g2.rotate((theta*Math.PI)/180);
-		Rectangle2D rect = new Rectangle2D.Double(-length/2.0, -30, length, 60);
+		Rectangle2D rect = new Rectangle2D.Double(-width/2.0, -30, width, 60);
 		if(electrified) {
 			//g2.setColor(Color.yellow);
 			g2.drawImage(icon.getImage(),(int)(0-width/2.0),(int)(-height/2.0),width, height, null);
@@ -68,6 +68,7 @@ public class Barrier  extends CollideableObject {
 		{
 			ArrayList<Double> xpts=new ArrayList<>();
 			ArrayList<Double> ypts=new ArrayList<>();
+			
 			for(int i =0; i<8;i++) {
 				xpts.add(-length/2.0+i*2*length/7.0);
 			}// takes 8 points along the x axis for detection
