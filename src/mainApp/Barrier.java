@@ -70,16 +70,17 @@ public class Barrier  extends CollideableObject {
 			ArrayList<Double> ypts=new ArrayList<>();
 			for(int i =0; i<8;i++) {
 				xpts.add(-length/2.0+i*2*length/7.0);
-			}
+			}// takes 8 points along the x axis for detection
 			for(int i =0; i<4;i++) {
 				ypts.add(-30+i*60.0/3.0);
-			}
-			//System.out.print(xpts.get(0));
+			}// takes 4 points along the y axis for detection
 			for(int i =0;i<32;i++) {
 				double xPt = xpts.get(i/8);
 				double yPt = ypts.get(i%4);
+				//matrix rotation
 				double alterX= xPt*Math.cos(theta*Math.PI/180.0)-yPt*Math.sin(theta*Math.PI/180.0);
 				double alterY= xPt*Math.sin(theta*Math.PI/180.0)+yPt*Math.cos(theta*Math.PI/180.0);
+				//detection
 				g2.drawOval((int)(x+alterX),(int) (y+alterY), 5, 5);
 			}
 		}
@@ -100,24 +101,22 @@ public class Barrier  extends CollideableObject {
 		double xPt,yPt,alterX,alterY;
 		for(int i =0; i<8;i++) {
 			xpts.add(-length/2.0+i*2*length/7.0);
-		}
+		}// takes 8 points along the x axis for detection
 		for(int i =0; i<4;i++) {
 			ypts.add(-30+i*60.0/3.0);
-		}		
+		}// takes 4 points along the x axis for detection		
 		for(int i =0;i<32;i++) {
 			xPt = xpts.get(i/8);
 			yPt = ypts.get(i%4);
+			
+			//matrix rotation
 			alterX= xPt*Math.cos(theta*Math.PI/180.0)-yPt*Math.sin(theta*Math.PI/180.0);
 			alterY= xPt*Math.sin(theta*Math.PI/180.0)+yPt*Math.cos(theta*Math.PI/180.0);
+			//detection
 			if(object.contains(x+alterX, y+alterY))
 				return true;
 		}
 		return false;
-//		Rectangle2D rect = new Rectangle2D.Double(x, y, width, height);
-		
-//		Polygon rect = new Polygon(x4, y4, 4);
-//		return object.intersects(rect);
-//		return object.;
 	}
 
 	@Override
