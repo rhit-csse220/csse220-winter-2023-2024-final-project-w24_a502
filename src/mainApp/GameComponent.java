@@ -209,7 +209,7 @@ public class GameComponent extends JComponent{
         player.update();
         scoreRecorder.update();
         
-        if (player.isDeath()) {
+        if (player.isDead()) {
             return true;
         }
         //System.out.println("hi");

@@ -20,7 +20,7 @@ public class coin extends CollideableObject {
 
 		icon=new ImageIcon("coin.png");
         height=icon.getIconHeight();
-        width=icon.getIconHeight();
+        width=icon.getIconWidth();
 
 		if(this.y+height>GameViewer.getFloor()) {
 			this.y=GameViewer.getFloor()-height;

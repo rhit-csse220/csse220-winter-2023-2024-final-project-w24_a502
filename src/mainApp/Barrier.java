@@ -35,12 +35,12 @@ public class Barrier  extends CollideableObject {
 		}
 		icon=new ImageIcon("electric barrier.png");
         height=icon.getIconHeight();
-        width=icon.getIconHeight();
+        width=icon.getIconWidth();
 
-		int[] Xs={0,};
-		int[] Ys={0,};
+		// int[] Xs={0,};
+		// int[] Ys={0,};
 		
-		Polygon polygon=new Polygon(Xs, Ys, 4);
+		// Polygon polygon=new Polygon(Xs, Ys, 4);
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class Player extends CollideableObject{
 	private static final double thrustIncrement = 10;
 	private double gravity=1;
     private static int life;
-	private boolean death=false;
+	private boolean dead=false;
 	private static double posY,posX;
     private boolean isFlying;
     private ImageIcon icon;
@@ -30,7 +30,7 @@ public class Player extends CollideableObject{
         
         height=icon.getIconHeight();
         
-        width=icon.getIconHeight();
+        width=icon.getIconWidth();
         
         life=3;
 
@@ -38,10 +38,13 @@ public class Player extends CollideableObject{
         velX=0;   
 
     }
+    public boolean isDead(){
+        return dead;
+    }
     @Override
     public void update() {
         if (life<1) {
-            death=true;
+            dead=true;
         }
         
         if (isFlying) {
@@ -74,7 +77,7 @@ public class Player extends CollideableObject{
             changeLife(-1);
         }
         if (x!=500) {
-            velX=-(x-500)/10;
+            velX=-(x-500)/100;
         }
 
         
@@ -87,7 +90,7 @@ public class Player extends CollideableObject{
     public void drawOn(Graphics2D g2) {
 		g2.translate(x,y);
 		
-		if(death) {
+		if(dead) {
 			//g2.setColor(Color.RED);
 		}
 		else {

@@ -92,7 +92,8 @@ public class GameViewer extends JPanel {
 						break;
 					case GAME_OVER: //reset all and start a new game
 						gameComponet.restartGame();
-						state = RUNNING;
+						state = START;
+						gameComponet.repaint();
 						t.stop();time=0;
 						System.out.println("New Game");
 						break;
