@@ -50,10 +50,10 @@ public class Barrier  extends CollideableObject {
 		g2.translate(x,y);
 		
 		g2.rotate((theta*Math.PI)/180);
-		Rectangle2D rect = new Rectangle2D.Double(-length/2, -30, length, 60);
+		Rectangle2D rect = new Rectangle2D.Double(-length/2.0, -30, length, 60);
 		if(electrified) {
 			//g2.setColor(Color.yellow);
-			g2.drawImage(icon.getImage(),0,-height,width, height, null);
+			g2.drawImage(icon.getImage(),(int)(0-width/2.0),(int)(-height/2.0),width, height, null);
 		}
 		else {
 			g2.setColor(Color.RED);
@@ -80,7 +80,6 @@ public class Barrier  extends CollideableObject {
 				double yPt = ypts.get(i%4);
 				double alterX= xPt*Math.cos(theta*Math.PI/180.0)-yPt*Math.sin(theta*Math.PI/180.0);
 				double alterY= xPt*Math.sin(theta*Math.PI/180.0)+yPt*Math.cos(theta*Math.PI/180.0);
-				System.out.println(alterX+"_____Y:"+alterY);
 				g2.drawOval((int)(x+alterX),(int) (y+alterY), 5, 5);
 			}
 		}
