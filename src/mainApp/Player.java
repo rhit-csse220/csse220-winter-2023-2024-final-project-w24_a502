@@ -123,12 +123,8 @@ public class Player extends CollideableObject{
     public static int getLife(){
             return life;
     }
-   @Override
-   boolean isOverLapping(Shape object) {
-	// TODO Auto-generated method stub
-	return false;
-   }//not used.
-	public Shape shape() {
+   
+	public Rectangle2D shape() {
 		return new Rectangle2D.Double(x, y, width, height);
 	}
 	@Override
@@ -147,13 +143,30 @@ public class Player extends CollideableObject{
         if (Invincible>0) {
             
         }else{
-            if ((barrier.x)>this.x) {
-                velX=-GameViewer.getGameSpeed();
+
+            if (this.x<barrier.x) {
+                x-=1;
+                velX=GameViewer.getGameSpeed();
+            }else if (this.y>barrier.y-barrier.height) {
+                y+=1;
+                velY=+1;
             }else{
-                velY=0;
+                y-=1;
+                velY=-1;
             }
+            
+            // x-=(barrier.x+barrier.width/2-this.x)/10;
+            // y-=(barrier.y-barrier.height/2-this.y)/10;
+            //velX=GameViewer.getGameSpeed();
+            
+            
             
         }
         
+    }
+    @Override
+    boolean isOverLapping(Rectangle2D object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isOverLapping'");
     }
 }

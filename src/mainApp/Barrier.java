@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
+import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -17,6 +17,7 @@ public class Barrier  extends CollideableObject {
     private boolean electrified;
 	private ImageIcon icon;
     public int height,width;
+	public Polygon collisionBox;
     public Barrier(int x2, int y2, int size, int theta, boolean electrified) {
 		super(x2, y2, 0, 0);
 		length=size;
@@ -33,27 +34,44 @@ public class Barrier  extends CollideableObject {
 			deathObject=true;
 		}else{
 			deathObject=false;
+			this.theta=(theta/46)*90;
 		}
-		icon=new ImageIcon("electric barrier.png");
-        height=icon.getIconHeight();
-        width=length;
 
-		// int[] Xs={0,};
-		// int[] Ys={0,};
+		icon=new ImageIcon("electric barrier.png");
+        height=(int) (icon.getIconHeight()*0.9);
+        width=(int) (length*1.2);
+		double cos=Math.cos((this.theta*Math.PI)/180);
+		double sin=Math.sin((this.theta*Math.PI)/180);
+
+		int[] Xs={	(int) x,
+					(int)(width*cos+x),
+					(int)(width*cos+height*sin+x),
+					(int)(height*sin+x)
+					};
+		int[] Ys={	(int) y,
+					(int)(width*sin+y),
+					(int)(width*sin-height*cos+y),
+					-(int)(height*cos)+(int)y
+					};
 		
-		// Polygon polygon=new Polygon(Xs, Ys, 4);
+		collisionBox=new Polygon(Xs, Ys, 4);
 	}
 
 	@Override
     public void drawOn(Graphics2D g2) {
 		//System.out.println(x+"   "+y);
-		g2.translate(x,y);
 		
+		
+		g2.setColor(Color.green);
+		g2.fill(collisionBox);
+
+		g2.translate(x,y);
 		g2.rotate((theta*Math.PI)/180);
-		Rectangle2D rect = new Rectangle2D.Double(-width/2.0, -30, width, 60);
+
+		Rectangle2D rect = new Rectangle2D.Double(0,-height,width, height);
 		if(electrified) {
-			//g2.setColor(Color.yellow);
-			g2.drawImage(icon.getImage(),(int)(0-width/2.0),(int)(-height/2.0),width, height, null);
+
+			g2.drawImage(icon.getImage(),0,-height,width, height, null);
 		}
 		else {
 			g2.setColor(Color.RED);
@@ -64,60 +82,35 @@ public class Barrier  extends CollideableObject {
 		g2.rotate((-theta*Math.PI)/180);
 		g2.setColor(Color.black);
 		g2.translate( -x,-y);
-//shows where detection occurs
-		{
-			ArrayList<Double> xpts=new ArrayList<>();
-			ArrayList<Double> ypts=new ArrayList<>();
-			
-			for(int i =0; i<8;i++) {
-				xpts.add(-length/2.0+i*2*length/7.0);
-			}// takes 8 points along the x axis for detection
-			for(int i =0; i<4;i++) {
-				ypts.add(-30+i*60.0/3.0);
-			}// takes 4 points along the y axis for detection
-			for(int i =0;i<32;i++) {
-				double xPt = xpts.get(i/8);
-				double yPt = ypts.get(i%4);
-				//matrix rotation
-				double alterX= xPt*Math.cos(theta*Math.PI/180.0)-yPt*Math.sin(theta*Math.PI/180.0);
-				double alterY= xPt*Math.sin(theta*Math.PI/180.0)+yPt*Math.cos(theta*Math.PI/180.0);
-				//detection
-				g2.drawOval((int)(x+alterX),(int) (y+alterY), 5, 5);
-			}
 		}
-// shows points of detection
-	}
 
 
 
      @Override
      public void update() {
          super.update();
+		 double cos=Math.cos((theta*Math.PI)/180);
+		double sin=Math.sin((theta*Math.PI)/180);
+
+		int[] Xs={	(int) x,
+					(int)(width*cos+x),
+					(int)(width*cos+height*sin+x),
+					(int)(height*sin+x)
+					};
+		int[] Ys={	(int) y,
+					(int)(width*sin+y),
+					(int)(width*sin-height*cos+y),
+					-(int)(height*cos)+(int)y
+					};
+		
+		collisionBox=new Polygon(Xs, Ys, 4);
      }
 
 	@Override
-	boolean isOverLapping(Shape object) {
-		ArrayList<Double> xpts=new ArrayList<>();
-		ArrayList<Double> ypts=new ArrayList<>();
-		double xPt,yPt,alterX,alterY;
-		for(int i =0; i<8;i++) {
-			xpts.add(-length/2.0+i*2*length/7.0);
-		}// takes 8 points along the x axis for detection
-		for(int i =0; i<4;i++) {
-			ypts.add(-30+i*60.0/3.0);
-		}// takes 4 points along the x axis for detection		
-		for(int i =0;i<32;i++) {
-			xPt = xpts.get(i/8);
-			yPt = ypts.get(i%4);
-			
-			//matrix rotation
-			alterX= xPt*Math.cos(theta*Math.PI/180.0)-yPt*Math.sin(theta*Math.PI/180.0);
-			alterY= xPt*Math.sin(theta*Math.PI/180.0)+yPt*Math.cos(theta*Math.PI/180.0);
-			//detection
-			if(object.contains(x+alterX, y+alterY))
-				return true;
-		}
-		return false;
+	boolean isOverLapping(Rectangle2D object) {
+		
+		
+		return collisionBox.intersects(object);
 	}
 
 	@Override

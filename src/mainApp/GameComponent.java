@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -294,7 +295,7 @@ public class GameComponent extends JComponent{
     	}
     }//Removes off screen objects from updating order
     public CollideableObject findObjectPlayerContact() {
-    	Shape p = player.shape();
+    	Rectangle2D p = player.shape();
     	for(CollideableObject o:collideableObjects) {
     		if(o.isOverLapping(p)) {
                 System.out.println("overlap!");

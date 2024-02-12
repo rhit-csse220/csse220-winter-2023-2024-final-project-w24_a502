@@ -46,7 +46,7 @@ public class coin extends CollideableObject {
         super.update();
     }
 	@Override
-	boolean isOverLapping(Shape object) {
+	boolean isOverLapping(Rectangle2D object)  {
 		Rectangle2D rect = new Rectangle2D.Double(x, y, width, height);
 		   return object.intersects(rect);
     	}

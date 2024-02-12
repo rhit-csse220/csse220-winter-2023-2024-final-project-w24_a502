@@ -3,6 +3,7 @@ package mainApp;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 
 public class Speed_Missle extends missile {
 	public Speed_Missle(int x2) {
@@ -73,7 +74,7 @@ public class Speed_Missle extends missile {
 
 
 	@Override
-	boolean isOverLapping(Shape object) {
+	boolean isOverLapping(Rectangle2D object)  {
 		// TODO Auto-generated method stub
 		return object.contains((int)(x-MISSLE_SIZE),(int)(y-MISSLE_SIZE), 2*MISSLE_SIZE, 2*MISSLE_SIZE);
 	}

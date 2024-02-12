@@ -3,6 +3,7 @@ package mainApp;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Dimension2D;
+import java.awt.geom.Rectangle2D;
 
 public abstract class CollideableObject {
 
@@ -36,7 +37,7 @@ public abstract class CollideableObject {
     	return(x<-600) ;//returns true if object is 600 pixels off the screen to the left
     	
     }
-    abstract boolean isOverLapping(Shape object);
+    abstract boolean isOverLapping(Rectangle2D object);
     public boolean isDeath() {
     	return deathObject;
     }
