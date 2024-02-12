@@ -333,7 +333,7 @@ public class GameComponent extends JComponent{
         }
         if (contact.getType()==ObjectType.MISSLE) {
             player.changeLife(-1);
-        }
+        }//
 
 
 
