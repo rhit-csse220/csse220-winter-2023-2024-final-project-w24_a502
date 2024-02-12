@@ -106,7 +106,7 @@ public class GameComponent extends JComponent{
             
 
             int name=s1.nextInt();
-            if (name<0||name>3) {throw new InvalidLevelFormatException(line);}
+            if (name<0||name>5) {throw new InvalidLevelFormatException(line);}
             
 
             int pos=s1.nextInt();
@@ -257,6 +257,14 @@ public class GameComponent extends JComponent{
                             obj.positionOfObject, 
                             0, 0));
                     break;   
+                case Speed_Missile:
+                    collideableObjects.add(
+                        new Speed_Missle(GameViewer.WIDTH,obj.positionOfObject));
+                    break;
+                case Tracking_Missile:
+                    collideableObjects.add(
+                        new TrackingMissile(GameViewer.WIDTH));
+                    break;
                 
             
                 default:
@@ -279,7 +287,7 @@ public class GameComponent extends JComponent{
 			collideableObjects.add(new TrackingMissile(GameViewer.WIDTH));
 		}
 		if(GameViewer.random(20)==2) {
-			collideableObjects.add(new Speed_Missle(GameViewer.WIDTH));
+			collideableObjects.add(new Speed_Missle(GameViewer.WIDTH,GameViewer.random(GameViewer.HEIGHT)));
 		}
 		
 	}
@@ -322,7 +330,9 @@ public class GameComponent extends JComponent{
                 player.stuck(barrier);
             }
             
-            
+        }
+        if (contact.getType()==ObjectType.MISSLE) {
+            player.changeLife(-1);
         }
 
 

@@ -8,42 +8,33 @@ import java.awt.geom.Rectangle2D;
 public class TrackingMissile extends missile {
 
 	public TrackingMissile(int x2) {
-		super(x2-MISSLE_SIZE, Player.getPosY(), 0, 0);
+		super(x2-30, Player.getPosY(), 0, 0);
 		// TODO Auto-generated constructor stub
 	}
 	private static final int MISSLE_SIZE = 30;
 	private static final double MISSLE_SPEED_MODIFER = 0.65;
-	private int missleTimer=500;
+	private int missleTimer=150;
 
 	@Override
 	public void update() {
 		
-    	if(missleTimer>0) {
-    		velX=-GameViewer.getGameSpeed();
-    		velY=((Player.getPosY()-this.y)*MISSLE_SPEED_MODIFER);
+    	if(missleTimer>50) {
+    		velX=0;
+    		velY=((Player.getPosY()-this.y)*0.1);
     		missleTimer--;
+    	}else if (missleTimer>0) {
+			velX=0;
+    		velY=0;
+    		missleTimer--;
+		}else {
+    		velY=0;
+    		velX=(2*GameViewer.getGameSpeed());
     	}
-    	else {
-    		velY=((Player.getPosY()-this.y));
-    		velX=((Player.getPosX()-this.x));
-    		double speedNorm=Math.sqrt(velX*velX+velY*velY);
-    		double gameSpeed= GameViewer.getGameSpeed();
-    		velY=-gameSpeed*velY/speedNorm*MISSLE_SPEED_MODIFER;
-    		velX=-gameSpeed*velX/speedNorm*MISSLE_SPEED_MODIFER;
-    		missleTimer=0;
-    	}
-    	this.x+=GameViewer.getGameSpeed()+velX;
+    	this.x+=velX;
     	
     	this.y+=velY;
     	
-    	if(y<=GameViewer.getCeiling()) {
-    		velY=0;
-    		y=GameViewer.getCeiling();
-    	}
-    	if(y>=GameViewer.getFloor()) {
-    		y=GameViewer.getFloor();
-    		velY=0;
-    	}
+
     	
 	}
 
@@ -52,30 +43,32 @@ public class TrackingMissile extends missile {
 		
 		g2.translate( x,y);
 		
-		if(missleTimer>0) {
-			g2.setColor(Color.YELLOW);
+		if(missleTimer>50) {
+			if(missleTimer%20>10) {
+				g2.setColor(Color.YELLOW);
+			}
+			else {
+				g2.setColor(Color.RED);
+			}
+			g2.fillRect(0, 0, 100, height);
+		}else if (missleTimer>0) {
+			g2.setColor(Color.RED);
 			
+			g2.fillRect(0, 0, 100, height);
 		}
 		else {
 			g2.setColor(Color.BLUE);
+			g2.drawImage(icon.getImage(),0,0,width, height, null);
 		}
-		g2.fillRect(0, 0, MISSLE_SIZE, MISSLE_SIZE);
+		
 		
 		g2.translate( -x,-y);
      
   }
 
 
-	@Override
-	boolean isOverLapping(Rectangle2D object)  {
-		// TODO Auto-generated method stub
-		return object.contains((int)(x-MISSLE_SIZE),(int)(y-MISSLE_SIZE), 2*MISSLE_SIZE, 2*MISSLE_SIZE);
-	}
 
-	@Override
-	public ObjectType getType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+	
 
 }
