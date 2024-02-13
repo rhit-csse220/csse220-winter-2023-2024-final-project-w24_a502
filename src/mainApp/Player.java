@@ -143,17 +143,32 @@ public class Player extends CollideableObject{
         if (Invincible>0) {
             
         }else{
-
-            if (this.x<barrier.x) {
-                x-=1;
-                velX=GameViewer.getGameSpeed();
-            }else if (this.y>barrier.y-barrier.height) {
-                y+=1;
-                velY=+1;
-            }else{
-                y-=1;
-                velY=-1;
-            }
+        	int ySideMultiplier=1,xSideMultiplier=1;
+        	double ang = barrier.getAngle();
+        	
+        	if(y-x*Math.sin(ang)<barrier.y-barrier.x*Math.sin(ang)) {
+        		ySideMultiplier=-1;
+        	}
+//        	if(x<barrier.x) {
+//        		xSideMultiplier=-1;
+//        	}
+        	
+        	x+=5*Math.abs(Math.sin(ang+Math.PI/90.0))*ySideMultiplier;
+        	y+=5*Math.abs(Math.cos(ang+Math.PI/90.0))*ySideMultiplier;
+        	velY+=5*Math.abs(Math.cos(ang+Math.PI/90.0))*ySideMultiplier;
+//        	velX+=Math.cos(ang)*xSideMultiplier;
+        	//velY-=Math.sin(ang)*ySideMultiplier;
+//            if (this.x<barrier.x) {
+//                velX=GameViewer.getGameSpeed();
+//            }
+//            else 
+//            	if (this.y>barrier.y) {
+//                y+=1;
+//                velY=+1;
+//            }else{
+//                y-=1;
+//                velY=-1;
+//            }
             
             // x-=(barrier.x+barrier.width/2-this.x)/10;
             // y-=(barrier.y-barrier.height/2-this.y)/10;
