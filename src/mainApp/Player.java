@@ -155,8 +155,12 @@ public class Player extends CollideableObject{
         	
         	x+=5*Math.abs(Math.sin(ang+Math.PI/90.0))*ySideMultiplier;
         	y+=5*Math.abs(Math.cos(ang+Math.PI/90.0))*ySideMultiplier;
-        	velY+=5*Math.abs(Math.cos(ang+Math.PI/90.0))*ySideMultiplier;
-//        	velX+=Math.cos(ang)*xSideMultiplier;
+        	velY+=6 *Math.abs(Math.cos(ang+Math.PI/90.0))*ySideMultiplier;//should just disable thrust or gravity. maybe set the vel to 0 might work better.
+        	if (Math.abs(ang)==Math.PI/2.0) {
+               velX= GameViewer.getGameSpeed();
+               x-=5*Math.abs(Math.sin(ang+Math.PI/90.0))*ySideMultiplier;
+           }
+        	//        	velX+=Math.cos(ang)*xSideMultiplier;
         	//velY-=Math.sin(ang)*ySideMultiplier;
 //            if (this.x<barrier.x) {
 //                velX=GameViewer.getGameSpeed();
@@ -177,7 +181,7 @@ public class Player extends CollideableObject{
             
             
         }
-        
+       
     }
     @Override
     boolean isOverLapping(Rectangle2D object) {
