@@ -31,16 +31,21 @@ public class Barrier  extends CollideableObject {
 		// 	this.y=(int) (GameViewer.getFloor()-this.length*Math.cos((this.theta*Math.PI)/180.0));
 		// }//forces the barrier to be with bounds of ceiling and floor
 
+		
+
+		icon=new ImageIcon("electric barrier.png");
+		
+        height=(int) (icon.getIconHeight()*0.9);
+        width=(int) (length*1.2);
+
 		if (electrified) {
 			deathObject=true;
+			
 		}else{
 			deathObject=false;
 			//this.theta=(theta/46)*90;
+			icon=new ImageIcon("non-ele_barrier.png");
 		}
-
-		icon=new ImageIcon("electric barrier.png");
-        height=(int) (icon.getIconHeight()*0.9);
-        width=(int) (length*1.2);
 		double cos=Math.cos((this.theta*Math.PI)/180);
 		double sin=Math.sin((this.theta*Math.PI)/180);
 
@@ -64,28 +69,30 @@ public class Barrier  extends CollideableObject {
 		
 		
 		g2.setColor(Color.green);
-		g2.fill(collisionBox);
+		//g2.fill(collisionBox);
 
 		g2.translate(x,y);
 		g2.rotate((theta*Math.PI)/180);
 
-		Rectangle2D rect = new Rectangle2D.Double(-width/2.0,-height/2,width, height);
-		if(electrified) {
+		//Rectangle2D rect = new Rectangle2D.Double(-width/2.0,-height/2,width, height);
+		// if(electrified) {
 
-			g2.drawImage(icon.getImage(),(int)(-width/2.0),-height/2,width, height, null);
-		}
-		else {
-			g2.setColor(Color.RED);
-			g2.fill(rect);
-		}
+		// 	g2.drawImage(icon.getImage(),(int)(-width/2.0),-height/2,width, height, null);
+		// }
+		// else {
+		// 	g2.setColor(Color.RED);
+		// 	g2.fill(rect);
+		// }
 		
+		g2.drawImage(icon.getImage(),(int)(-width/2.0),-height/2,width, height, null);
+
 		
 		g2.rotate((-theta*Math.PI)/180);
 		g2.setColor(Color.black);
 		g2.translate( -x,-y);
-		g2.setColor(Color.green);
-		g2.fill(collisionBox);
-		g2.setColor(Color.black);
+		// g2.setColor(Color.green);
+		// g2.fill(collisionBox);
+		//g2.setColor(Color.black);
 //		ArrayList<Double> xpts=new ArrayList<>();
 //		ArrayList<Double> ypts=new ArrayList<>();
 //				
@@ -138,7 +145,7 @@ public class Barrier  extends CollideableObject {
 		int[] Xs=new int[4];
 		int[] Ys=new int[4];
 		for(int i =0;i<4;i++) {
-			xpts.add(length*(((i+1)/2)%2)-length/2.0);
+			xpts.add(width*(((i+1)/2)%2)-width/2.0);
 			ypts.add(height*(i/2)-height/2.0);
 			//matrix rotation
 			
