@@ -234,7 +234,7 @@ public class GameComponent extends JComponent{
                 case Electrified_Barrier:
                     collideableObjects.add(
                         new Barrier(
-                            GameViewer.WIDTH, 
+                            GameViewer.WIDTH+500, 
                             obj.positionOfObject, 
                             obj.sizeOfObject, 
                             obj.angleOfObject,
@@ -243,7 +243,7 @@ public class GameComponent extends JComponent{
                 case Non_Electric_Barrier:
                     collideableObjects.add(
                         new Barrier(
-                            GameViewer.WIDTH, 
+                            GameViewer.WIDTH+500, 
                             obj.positionOfObject, 
                             obj.sizeOfObject, 
                             obj.angleOfObject,

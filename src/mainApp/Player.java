@@ -148,7 +148,7 @@ public class Player extends CollideableObject{
         	double ang = barrier.getAngle();
         	if(y-x*Math.sin(ang)<barrier.y-barrier.x*Math.sin(ang)) {
         		ySideMultiplier=-1;
-        	}
+            }
 //        	if(x<barrier.x) {
 //        		xSideMultiplier=-1;
 //        	}
