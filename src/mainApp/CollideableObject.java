@@ -34,7 +34,7 @@ public abstract class CollideableObject {
     	}
     }
     public boolean isOffScreen() {
-    	return(x<-1000) ;//returns true if object is 600 pixels off the screen to the left
+    	return(x<-1000) ;//returns true if object is 1000 pixels off the screen to the left
     	
     }
     abstract boolean isOverLapping(Rectangle2D object);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -155,6 +156,7 @@ public class GameComponent extends JComponent{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+        background.drawOn(g2);
 
         switch (GameViewer.getState()) {//draw according to state
             case START:
@@ -187,7 +189,7 @@ public class GameComponent extends JComponent{
     }
 
     private void drawRuning(Graphics2D g2) {
-        background.drawOn(g2);
+        
 
 		for (CollideableObject collideableObject : collideableObjects) {
 			collideableObject.drawOn(g2);
@@ -198,7 +200,8 @@ public class GameComponent extends JComponent{
     }
 
     private void drawStart(Graphics2D g2) {
-        g2.drawString("Press any key to start", 50, 50);
+        g2.setColor(Color.WHITE);
+        g2.drawString("Press any key to start", 100,150);
     }
 
     public boolean update(){
@@ -209,15 +212,17 @@ public class GameComponent extends JComponent{
         }
         player.update();
         scoreRecorder.update();
+        background.update();
         
         if (player.isDead()) {
+            scoreRecorder.reset();
             return true;
         }
         //System.out.println("hi");
         handleGenerateObjects();
-        if(GameViewer.getTime()>RANDOM_OBJECT_DELAY_START) {
-        handleGenerateObjectsRandomly();
-        }
+        // if(GameViewer.getTime()>RANDOM_OBJECT_DELAY_START) {
+        // handleGenerateObjectsRandomly();
+        // }
         handleDeleteOffScreenObjects();
         handleObjectPlayerContact();
         return false;
@@ -226,6 +231,13 @@ public class GameComponent extends JComponent{
     }
     private void handleGenerateObjects() {
         if (ObjectsToAdd.isEmpty()) {
+            scoreRecorder.levelUp();
+            try {
+                this.loadLevel(ScoreRecorder.getLevel());
+            } catch (InvalidLevelFormatException e1) {
+                System.err.println(e1.getMessage()+" Skipped");;
+            }
+            GameViewer.setTime();
             return;
         }
         toAddObject obj=ObjectsToAdd.get(0);

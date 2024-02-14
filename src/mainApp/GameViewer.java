@@ -57,6 +57,7 @@ public class GameViewer extends JPanel {
 				time++;
 				if(gameComponet.update()){
 					state=GAME_OVER;
+					
 				}
 				gameComponet.repaint();
 				
@@ -94,6 +95,7 @@ public class GameViewer extends JPanel {
 						gameComponet.restartGame();
 						state = START;
 						gameComponet.repaint();
+						
 						t.stop();time=0;
 						System.out.println("New Game");
 						break;
@@ -202,6 +204,10 @@ public class GameViewer extends JPanel {
 
 	public static Integer getTime() {
 		return time;
+	}
+
+	public static void setTime() {
+		time=-200;
 	}
 
 }

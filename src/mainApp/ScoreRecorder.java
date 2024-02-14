@@ -24,10 +24,10 @@ public class ScoreRecorder {
     }
 
     public void drawOn(Graphics2D g2){
-        g2.setColor(Color.BLACK);
+        g2.setColor(Color.WHITE);
         g2.drawString(  "score:"+score+"  "+
                         "level:"+level+"  "+
-                        "distance:"+(int)(distance)+"  "+
+                        "distance:"+(int)(distance)+"m  "+
                         "speed: "+(int)(-GameViewer.getGameSpeed())+"   "+
                         "life: "+Player.getLife()+"  "+
                         "numberCoins:"+numberCoins+"  ", 
@@ -38,6 +38,7 @@ public class ScoreRecorder {
         score=0;
         distance=0;
         numberCoins=0;
+        level=1;
     }
 
     
@@ -46,8 +47,8 @@ public class ScoreRecorder {
 
     public void levelUp() {
         level+=1;
-        if (level>2) {
-            level=2;
+        if (level>5) {
+            level=5;
             System.out.println("You are alreay at highest level");
         }
     }
@@ -65,7 +66,7 @@ public class ScoreRecorder {
     }
 
     public void update() {
-        distance=(int) -GameViewer.getDistance();
+        distance+=1;
         score=(int) (distance*10*-GameViewer.getGameSpeed()+numberCoins*1000);
     }
 
