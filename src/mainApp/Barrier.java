@@ -181,10 +181,11 @@ public class Barrier  extends CollideableObject {
 //				return true;
 //		}
 //		return false;
-		
+		if(collisionBox.intersects(object)&&!electrified) {
+          			int dummy = 0;
+		}
 		return collisionBox.intersects(object);
 	}
-
 	@Override
 	public ObjectType getType() {
 		return ObjectType.BARRIER;

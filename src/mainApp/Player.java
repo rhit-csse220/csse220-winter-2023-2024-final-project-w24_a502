@@ -98,11 +98,12 @@ public class Player extends CollideableObject{
                 
             }else{
 			    g2.drawImage(icon.getImage(),0,0,width, height, null);
+			    
             }
 		}
 		
 		g2.translate( -x,-y);
-		
+		g2.draw(new Rectangle2D.Double(x, y, width, height));   
     }
 
 
@@ -145,7 +146,6 @@ public class Player extends CollideableObject{
         }else{
         	int ySideMultiplier=1,xSideMultiplier=1;
         	double ang = barrier.getAngle();
-        	
         	if(y-x*Math.sin(ang)<barrier.y-barrier.x*Math.sin(ang)) {
         		ySideMultiplier=-1;
         	}
@@ -160,6 +160,20 @@ public class Player extends CollideableObject{
                velX= GameViewer.getGameSpeed();
                x-=5*Math.abs(Math.sin(ang+Math.PI/90.0))*ySideMultiplier;
            }
+        	if (Math.abs(ang)==0) {
+                velY= 0;
+                y-=5*Math.abs(Math.cos(ang+Math.PI/90.0))*ySideMultiplier;
+            }
+        	if(y<GameViewer.getCeiling()+height) {
+        		y=GameViewer.getCeiling()+height;
+        		velX= GameViewer.getGameSpeed();
+                x-=5*Math.abs(Math.sin(ang+Math.PI/90.0))*ySideMultiplier;
+        	}
+        	if(y>GameViewer.getFloor()-100) {
+        		y=GameViewer.getFloor()-100;
+        		velX= GameViewer.getGameSpeed();
+                x-=5*Math.abs(Math.sin(ang+Math.PI/90.0))*ySideMultiplier;
+        	}
         	//        	velX+=Math.cos(ang)*xSideMultiplier;
         	//velY-=Math.sin(ang)*ySideMultiplier;
 //            if (this.x<barrier.x) {
