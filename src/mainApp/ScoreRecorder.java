@@ -9,7 +9,7 @@ public class ScoreRecorder {
 
     private int score; 
 	private static int level;
-    private int distance;
+    public static int distance;
     private int numberCoins;
 
     

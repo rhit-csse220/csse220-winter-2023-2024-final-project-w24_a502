@@ -156,20 +156,16 @@ public class GameViewer extends JPanel {
 	}
 	public static double getGameSpeed() {
 	//	System.out.println("time   "+time+" speed "+GROWTH +"   "+(-(MAX_SPEED)*(1/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))))+" power  "+1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))));
-		return (-3+(-(MAX_SPEED-3)/(1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT))))));
+		return -10-ScoreRecorder.distance*0.001;
 	}
-	public static double getDistance() {
-		return -3*time-(MAX_SPEED-3)*Math.log((1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))))+(MAX_SPEED-3)*Math.log((1+Math.pow(Math.E,(-(GROWTH)*(0-MIDPOINT)))));
-	}
+	// public static double getDistance() {
+	// 	return -3*time-(MAX_SPEED-3)*Math.log((1+Math.pow(Math.E,(-(GROWTH)*(time-MIDPOINT)))))+(MAX_SPEED-3)*Math.log((1+Math.pow(Math.E,(-(GROWTH)*(0-MIDPOINT)))));
+	// }
 	public static int getFloor() {
 		return HEIGHT;
 	}
 	
 
-	protected void handleCheckGameOver() {
-		// TODO Auto-generated method stub
-//		throw new UnsupportedOperationException("Unimplemented method 'handleCheckGameOver'");
-	}
 	
 	/**
 	 * ensures: runs the application
