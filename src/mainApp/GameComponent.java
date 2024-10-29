@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -157,6 +158,7 @@ public class GameComponent extends JComponent{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
         background.drawOn(g2);
+        g2.setFont(new Font("Serif", Font.BOLD, 30));
 
         switch (GameViewer.getState()) {//draw according to state
             case START:
@@ -181,11 +183,11 @@ public class GameComponent extends JComponent{
 
 
     private void drawGameOver(Graphics2D g2) {
-        g2.drawString("Game Over!", 50, 50);
+        //g2.drawString("Game Over!", 50, 50);
     }
 
     private void drawPause(Graphics2D g2) {
-        g2.drawString("Game Paused", 50, 50);
+        //g2.drawString("Game Paused", 50, 50);
     }
 
     private void drawRuning(Graphics2D g2) {
@@ -360,12 +362,14 @@ public class GameComponent extends JComponent{
     }
 
 
-    public void restartGame() {
+    public void restartGame(boolean resetScoreRecorder) {
         collideableObjects.clear();
         ObjectsToAdd.clear();
         player=new Player(500, 300, 30, 40);
-       
-        this.scoreRecorder.reset();
+        if (resetScoreRecorder) {
+            this.scoreRecorder.reset();
+        }
+        
         this.background=new Background();
         
 

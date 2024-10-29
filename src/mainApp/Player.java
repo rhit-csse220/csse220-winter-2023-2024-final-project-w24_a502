@@ -32,7 +32,7 @@ public class Player extends CollideableObject{
         
         width=(int) (icon.getIconWidth()*1.2);
         
-        life=3;
+        life=5;
 
         Invincible=70;
         velX=0;   

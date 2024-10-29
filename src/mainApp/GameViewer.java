@@ -82,17 +82,20 @@ public class GameViewer extends JPanel {
 				
 				switch (state) {
 					case START: //start game
-						state = RUNNING; // 
-						t.start();time=0;
-						System.out.println("Game Start");
-						try {
-							gameComponet.loadLevel(ScoreRecorder.getLevel());
-						} catch (InvalidLevelFormatException e1) {
-							System.err.println(e1.getMessage()+" Skipped");;
+						if (e.getKeyCode()==32) {
+							state = RUNNING; // 
+							t.start();time=0;
+							System.out.println("Game Start");
+							try {
+								gameComponet.loadLevel(ScoreRecorder.getLevel());
+							} catch (InvalidLevelFormatException e1) {
+								System.err.println(e1.getMessage()+" Skipped");;
 						}
+						}
+						
 						break;
 					case GAME_OVER: //reset all and start a new game
-						gameComponet.restartGame();
+						gameComponet.restartGame(true);
 						state = START;
 						gameComponet.repaint();
 						
@@ -112,13 +115,13 @@ public class GameViewer extends JPanel {
 
 						}else if (e.getKeyCode()==38) {//UP=38
 							gameComponet.levelUp();
-							gameComponet.restartGame();
+							gameComponet.restartGame(false);
 							state=START;
 							t.stop();time=0;
 							gameComponet.repaint();
 						}else if (e.getKeyCode()==40) {//Down=40
 							gameComponet.levelDown();
-							gameComponet.restartGame();
+							gameComponet.restartGame(false);
 							state=START;
 							t.stop();time=0;
 							gameComponet.repaint();
